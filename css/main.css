@@ -1,0 +1,143 @@
+/*! Reset !*/
+html {
+    font-size: 100%;
+    overflow-y: scroll;
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    font-weight: 400;
+    font-style: normal;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+  font-size: 100%; }
+  @media (min-width: 36em) {
+    body {
+      font-size: 110%; } }
+  @media (min-width: 58em) {
+    body {
+      font-size: 120%; } }
+  @media (min-width: 86em) {
+    body {
+      font-size: 130%; } }
+  @media (min-width: 115em) {
+    body {
+      font-size: 160%; } }
+  @media (min-width: 125em) {
+    body {
+      font-size: 170%; } }
+  @media (min-width: 145em) {
+    body {
+      font-size: 180%; } }
+
+/*! Personalizado !*/
+
+html {
+    height: 100%;
+    max-height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: #eee;
+    font-size: 200%;
+}
+
+body {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: #eee;
+}
+
+header,
+main,
+footer {
+    margin: 0 5%;
+    text-align: center;
+    background: #fff;
+}
+
+footer {
+    color: #888;
+}
+
+h2 {
+    color: #aaa;
+}
+
+#preload {
+    background: #689f38;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 998;
+}
+
+#preload-content {
+    height: 100px;
+    left: 50%;
+    margin-left: -120px;
+    margin-top: -50px;
+    position: absolute;
+    top: 50%;
+    width: 240px;
+    z-index: 999;
+    color: #fff;
+}
+
+.isa_error,
+#browsehappy {
+    position: absolute;
+    top: 50%;
+    margin: 0 auto;
+    margin-top: -50px;
+    width: 100%;
+    padding: 12px;
+    color: #D8000C;
+    background-color: #FFBABA;
+    font-size: 50%;
+    text-align: center;
+}
+
+#browsehappy {
+    display: none;
+    font-size: 50%;
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5% 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+blockquote p {
+    display: inline;
+}
+@media all and (max-width: 36em) {
+    footer{ font-size: 76%; }
+}

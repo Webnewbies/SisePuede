@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+	<head>
+		<meta charset="UTF-8">
+		<title>No legacy</title>
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+    	<meta name="description" content="SisePuede: Solución para navegadores modernos">
+    	<meta content="Pedro Macedo Minchán" name="author">
+    	<meta name="contact" content="pedro.macedo.minchan@gmail.com">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		
+		<!-- // TODO nuestro estilo CSS2+ -->
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Agregamos .js a elemento html -->
+		<script>
+			var dialog = [];
+	        document.documentElement.className = 'js';
+	    </script>
+
+		<!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
+		<noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
+	</head>
+	
+	<!-- // El Cuerpo del Documento HTML5 -->
+	<body>
+		<header role="banner">
+			<h1>¡Si se puede!</h1>
+			<h2>no-Legacys</h2>
+		</header>
+		<main role="main">
+			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a programar con <mark>ECMAScript 5!+ con FULL HTML5</mark> :) </p></blockquote>
+		</main>
+		<footer role="contentinfo">
+			<p><em><span>Si te pones a pensar</span><span>,</span> <span>puedes hacer mucho más con esto..</span></em></p>
+		</footer>
+
+		<div id="preload">
+			<div id="preload-content">
+				<p>Bienvenido...</p>
+				<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor <a href="http://browsehappy.com/">actualize su navegador</a> para una mejor experiencia.</p>
+			</div>
+		</div>
+
+
+
+<!-- =============== TODO javascript =============== -->
+		<script>
+		<!--
+			(function( global, document, undefined ) {
+				'use strict';
+
+				var HTML5test 			= true,
+					isCanvasSupported	= !!isElementSupported('canvas');
+
+				/*
+				* @ref https://github.com/ryanmorr/is-element-supported
+				* @access private
+				* @function isElementSupported
+				* @returns {true|false|undefined}
+				*/
+				
+				function isElementSupported( tag ) {
+					var element, toString = {}.toString;
+					 // (Safari 4 - 5.1, Chrome 14) y (Internet Explorer 8)
+					//global.HTMLElement = global.HTMLElement || global.HTMLGenericElement;
+					global.HTMLUnknownElement = global.HTMLUnknownElement || global.HTMLElement || global.HTMLGenericElement;
+				    if ( !global.HTMLUnknownElement ) {
+				        return undefined;
+				    }
+				    element = createElement( tag );
+				    return toString.call( element ) !== '[object HTMLUnknownElement]';
+				    //return Object.prototype.toString.call(element) !== '[object HTMLUnknownElement]';
+				}
+
+				/*
+		       * @ref https://github.com/Modernizr/Modernizr/blob/master/src/createElement.js
+		       * @access private
+		       * @function createElement
+		       * @returns {HTMLElement|SVGElement} An HTML or SVG element
+		       */
+				function createElement() {
+					var isSVG = document.documentElement.nodeName.toLowerCase() === 'svg';
+					if ( typeof document.createElement !== 'function' ){
+						return document.createElement( arguments[0] );
+					} else {
+						return isSVG ? document.createElementNS.call( document, 'http://www.w3.org/2000/svg',arguments[0] )
+									: document.createElement.apply( document, arguments ) ;
+					}
+				}
+
+				var caniuse = (function() {
+					var ECMAScript1			= !!( Array.prototype && Array.prototype.join ),
+						ECMAScript3			= !!( Array.prototype && Array.prototype.pop ),
+						ECMAScript5			= (function() { 'use strict'; return !this; })(),
+					  	ECMAScript6			= !!Object.assign,
+					  	ECMAScript7			= !!( Array.prototype && Array.prototype.includes ),
+					  	//hasDunderProto 		= { __proto__: [] } instanceof Array,
+					  	WebStorage			= !!global.localStorage,
+					  	addEventListener 	= !!global.addEventListener,
+					  	querySelectorAll 	= !!document.querySelectorAll,
+					  	canvasSupported 	= (function() {
+					  							var e;
+					  							if( !!global.HTMLCanvasElement ) return true;
+					  							return !isCanvasSupported ? false
+					  									: ( e = createElement('canvas'),
+					  										!!( e.getContext && e.getContext('2d') )
+					  										);
+					  						})(),
+						canvasText 			= !canvasSupported ? false : typeof createElement('canvas').getContext('2d').fillText === 'function',
+					  	canvas2DSupported 	= !!global.CanvasRenderingContext2D && CanvasRenderingContext2D.hasOwnProperty('prototype'),
+					  	WebGL3DSupported	= (function() {
+					  							var e;
+					  							if( !!global.WebGLRenderingContext && WebGLRenderingContext.hasOwnProperty('prototype') ) return true;
+					  							return !isCanvasSupported ? false 
+					  									: ( e = createElement('canvas'),
+					  										!!( e.getContext && ( e.getContext('webgl')  !== 'undefined' || e.getContext('experimental-webgl') !== 'undefined' ) )
+					  										);
+					  						})(),
+					  	CanvasBlending		= (function( a ) {
+					  							if( !canvasSupported ) return false;
+					  							var c = createElement('canvas').getContext('2d'); 
+					  							try {
+					  								c.globalCompositeOperation = a;
+					  							} catch ( e ) {}
+					  							return c.globalCompositeOperation === a;
+					  						}('multiply'));
+
+					  	return {
+							ECMA262		: ECMAScript7 ? 7 : ECMAScript6 ? 6 : ECMAScript5 ? 5 : ECMAScript3 ? 3 : ECMAScript1 ? 1 : 0,
+							HTML5		: canvasText && WebStorage,
+							HTML51		: WebGL3DSupported,
+							HTML5full	: canvasSupported && canvas2DSupported && WebGL3DSupported && CanvasBlending,
+							CSS3Selector: querySelectorAll,
+							modernAPI	: addEventListener
+					  	};
+
+				}());
+				
+				/*! Para una condición más agresiva, cambie caniuse.HTML5 por caniuse.HTML5full  !*/
+				document.write( '\u003Cscript src=script/' + ( HTML5test && caniuse.ECMA262 >= 5 && caniuse.HTML5 &&  caniuse.CSS3Selector && caniuse.modernAPI ? (dialog.push('html5'), 'vanilla') : ( document.getElementById('browsehappy').style.cssText = 'display: block;' ,'legacy') ) + '.js>\u003C/script>' );
+
+			})( typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this, document );
+		//-->
+		</script>
+<!-- =============== FIN javascript =============== -->
+
+	</body>
+</html>
