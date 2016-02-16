@@ -1,5 +1,5 @@
-# SisePuede v0.4
-Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad **si se puede**.
+# SisePuede v0.6
+Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad **Si se Puede**.
 
 ... mi nombre es Pedro (**Peter** :), y les contaré de qué se trata todo esto.
 
@@ -16,13 +16,13 @@ En la lista del menú tenemos:
 
 ### Herramientas
 
-OK. Para hacer fácil la tarea, mencionaré las herramientas que tengo para preparar:
+OK. Para hacer fácil la tarea, mencionaré las herramientas que usaré:
 
 * OS: Mac OS X El Capitán v10.11.1
 * Virtuals: VMware
 * Browsers: Opera v[9, 35], Firefox v[4.0.1, 15, 43], Chrome v[48], Safari v[9.0.1], IE v[6,7] en XP SP3, IE v[11] y EDGE 12 en Windows 10 HE
 * Editors: Sublime Text 3 y MacDown 0.5.5
-* Dispositivos Móviles: BB Curve con bb5 y bb6, iPhone4,5y6 con ios9, Mobile. 
+* Dispositivos Móviles: BB Curve con bb5 y bb6, iPhone4-6 con ios9, Mobile. 
 
 ### Receta
 
@@ -31,20 +31,26 @@ Lo básico para hacer nuestro menú, es tener a la mano:
 * HTML5 Fix
 * DOM4
 * Polyfill ES5+
-* Bibliotecas con similitud de uso.
+* Bibliotecas con formas de uso familiar.
 
 ### Ir de Compras
 
-Ahora me toca ir al mercado. En [HTML5 Polyfill](http://html5polyfills.com) me encontré con muchas cosas interesantes, como también en [HTML5 Cross Browser Polyfills](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills). Pero probando y probando; solo me quedé con las que me han funcionado, entre los descartados son: ES5: [es5-shim v4.5.2](https://github.com/es-shims/es5-shim), selector: [Zest](https://github.com/chjj/zest) muy bueno por cierto, Legacy HTML5: [HTML5 shiv](https://github.com/aFarkas/html5shiv) y DOM4: [DOM4](https://github.com/WebReflection/dom4).
+Ahora me toca ir al mercado. En [HTML5 Polyfill](http://html5polyfills.com) me encontré con muchas cosas interesantes, como también en [HTML5 Cross Browser Polyfills](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills). Pero probando y probando; elegí las que me han funcionado, entre los descartados son: ES5: [es5-shim v4.5.2](https://github.com/es-shims/es5-shim), selector: [Zest](https://github.com/chjj/zest) muy bueno por cierto, Legacy HTML5: [HTML5 shiv](https://github.com/aFarkas/html5shiv) y DOM4: [DOM4](https://github.com/WebReflection/dom4).
 
-### Ingredientes
+Y lo que compré, fueron:
 
-Lo bueno del todo, es que se hace conseguido con mucho tino, paciencia y esmero; lo siguiente:
 
 * `HTML5 Fix`: [Hagenburger](http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html)
 * `DOM4`: [CSS_Selector_Engine](https://github.com/termi/CSS_selector_engine)
 * `Polifyll para ES5+`: [ES5-DOM-Shim](https://github.com/termi/ES5-DOM-SHIM)
 * `Bibliotecas`: [Zepto](http://zeptojs.com), [jQuery](http://jquery.com/), [MooTools](http://mootools.net), y [Otros](https://cdnjs.com/libraries) por probar.
+
+
+### Ingredientes
+
+Para que todo salga bién, he tenido que prestar los servicios de algunos apoyadores:
+
+** [Modernirz](http://modernizr.com/download/?-es5), para la detección de características de ECMAScript 5.
 
 ### Elaboración
 
@@ -75,6 +81,7 @@ Crear una estructura básica de archivos para un sitio Web:
    			├───a.js
     		├───a.ie8.js
     		├───a.ielt8.js
+    		├───getComputedStyle.js	
     		├───CSS_selector_engine.js	
     
 ##### .. del documento HTML5
@@ -98,44 +105,41 @@ La estructura base para nuestros archivos HTML5 serán:
 #### Saborizantes
 
 Ahora le ponemos sabor. 
-Para escribir código bajo el estándar `ECMAScript versión 5+`, es necesario introducir las siguientes instrucciones dentro de los bloques según plantillas:
+Para escribir código bajo el estándar `ECMAScript versión 5+`, es necesario introducir las siguientes instrucciones dentro de los bloques según plantilla:
 
 ##### <a name="vanilla"></a>index.html
 
-Crearemos un documento html5 que sea capáz de interpretar `ECMAScript 5+`.
+Crearemos un documento html5 que sea capáz de interpretar `ECMAScript 5+` para usar **`Vanilla JS`**.
 
 `<!-- {BLOQUE HEAD #1} -->`
 
 ```
-<!-- // TODO nuestro estilo CSS2+ -->
-<link rel="stylesheet" href="css/main.css">
-
-<!-- http://modernizr.com/download/?-es5-setclasses -->
-<script src="script/vendor/modernizr-custom.min.js"></script>
-
 <script>
-	var // Nos servirá para agregar el estado de cada instrucción para luego ser usado
-		dialog = [];
+	var // Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+		dialogo = [];
 
 	if( !Modernizr.es5 ) {
 
-		dialog.push('no-es5');
+		dialogo[0] = 'shim';
 
 		/*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
 		'article aside dialog figcaption figure footer header main nav section mark template'.replace(/\w+/g,function(n){document.createElement(n)});
 
 		/*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
 		if ( /*@cc_on!@*/true ) {
+
+			dialogo[1] = 'no-IE';
 	
 			/*! @ref https://github.com/termi/CSS_selector_engine !*/
 			document.write( '\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>' );
 
 			// {Aquí se puede agregar más polyfills para ECMAScript <= 5: http://html5polyfills.com}
 
-			dialog.push('no-IE');
 		} else {
 			/*! https://gist.github.com/jalbertbowden/5174156 !*/
 			var ieVersion = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[1] ) ) || NaN;
+
+			if( ieVersion ) dialogo[2] = 'IE';
 
 			/*! @ref https://github.com/termi/ES5-DOM-SHIM !*/
 			if ( ieVersion == 8 ) document.write( '\u003Cscript src="script/vendor/legacy/a.ie8.js">\u003C/script>' );
@@ -143,13 +147,16 @@ Crearemos un documento html5 que sea capáz de interpretar `ECMAScript 5+`.
 
 			// {Aquí se puede agregar más polyfills sólo para IE<10: http://html5polyfills.com}
 
-			ieVersion || dialog.push('IE');
 		}
 				
-		/*! Añade métodos de ECMACScript 5/6 !*/
+		/*! Añadimos ECMAScript 5 Shim !*/
 		document.write( '\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>' );
 	}
-	dialog.push('es5');
+
+	dialogo[3] = 'es5';
+
+	/*! AQUÍ añade ECMAScript 6 Shim !*/
+
 </script>
 
 <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
@@ -185,8 +192,8 @@ Crearemos un documento html5 que sea capáz de interpretar `ECMAScript 5+`.
 
 ```
 <script>
-	/*! TODO Plain JS !*/
-	document.write( '\u003Cscript type="text/javascript" src="script/' + ( dialog.indexOf('es5') != -1 ? 'vanilla' : 'legacy' ) + '.js">\u003C/script>' );
+	/*! Opcional | TODO Plain JS !*/
+	document.write( '\u003Cscript type="text/javascript" src="script/' + ( dialogo.indexOf('es5') != -1 ? 'vanilla' : 'legacy' ) + '.js">\u003C/script>' );
 </script>
 ```
 
@@ -194,10 +201,50 @@ Crearemos un documento html5 que sea capáz de interpretar `ECMAScript 5+`.
 
 Crearemos un documento html5 que sea capaz de entender `ECMAScript 5+` haciendo uso de cualquier biblioteca. Para este ejemplo, usaremos `Zepto v1.1.6`
 
-`<!-- {BLOQUE HEAD} -->`
+`<!-- {BLOQUE HEAD #2} -->`
 
 ```
-<!-- Añadimos: {BLOQUE HEAD #1} -->
+<!-- // TODO nuestro estilo CSS2+ -->
+<link rel="stylesheet" href="css/main.css">
+
+<!-- http://modernizr.com/download/?-es5-setclasses -->
+<script src="script/vendor/modernizr-custom.min.js"></script>
+
+<script>
+	var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+		dialogo = [];
+
+	if( !Modernizr.es5 ) {
+		dialogo[0] = 'shim';
+
+		/*! https://gist.github.com/jalbertbowden/5174156 !*/
+		var ieVersion = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[1] ) ) || NaN;
+
+		/*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
+		'article aside dialog figcaption figure footer header main nav section mark template'.replace(/\w+/g,function(n){document.createElement(n)});
+
+		/*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
+		if ( /*@cc_on!@*/true  ) dialogo[1] = 'no-IE';
+				if( ieVersion ) dialogo[2] = 'IE';
+
+		if ( ieVersion < 9 ) document.write( '\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>' );
+
+		if ( ieVersion > 7 || /*@cc_on!@*/true ) document.write( '\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>' );
+
+		// {Aquí se puede agregar más polyfills: http://html5polyfills.com}
+
+		/*! Añadimos ECMACScript 5 Shim !*/
+		document.write( '\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>' );
+
+		/*! AQUÍ puedes agregar ECMACScript 6 Shim !*/
+
+	}
+	dialogo[3] = 'es5';
+</script>
+
+<!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
+<noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
+
 <!-- // Cuando no se haya podido iniciar ninguna biblioteca -->
 <link rel="stylesheet" href="css/no-lib.css">
 ```
@@ -205,18 +252,13 @@ Crearemos un documento html5 que sea capaz de entender `ECMAScript 5+` haciendo 
 `<!-- {BLOQUE JAVASCRIPT} -->`
 
 ```
-<!-- // Aquí se puede iniciar usando cualquier biblioteca. 
-		Podrias usar la dirección https://cdnjs.com/libraries/${LibraryName} 
-		donde LibraryName = ['Zepto', 'jQuery', 'MooTools', ...params];
-		-->
-		
-<!-- /zepto/?-event-fx_methods-fx -->
-<script src="http://zeptojs.com/zepto-docs.min.js"></script>
+<!-- /zepto/?-zepto-ie-event-ajax-detect-fx-touch  -->
+<!--// <script src="http://zeptojs.com/zepto-docs.min.js"></script> -->
 <script>window.Zepto || document.write( '\u003Cscript src="script/vendor/zepto.js">\u003C/script>' )</script>
 
 <script>
 	var libFuncName = null;
-	if (typeof Zepto === "undefined" && typeof $ === "function") {
+		if (typeof Zepto === "undefined" && typeof $ === "function") {
 			libFuncName = $;
 		} else if ( typeof Zepto === "function" ) {
 			libFuncName = Zepto;
@@ -224,37 +266,39 @@ Crearemos un documento html5 que sea capaz de entender `ECMAScript 5+` haciendo 
 			document.write( '\u003Cscript src="script/main.js">\u003C/script>' );
 		} else {
 			try {
-				dialog.push('no-lib');
-				/*! Agremamos .no-lib a la etiquena html si no se pudo cargar alguna biblioteca !*/
+				dialogo[4] = 'no-lib';
+				/*! Agremamos .no-lib a la etiquena html si es que no cargó alguna biblioteca !*/
 				document.body || ( document.body = document.getElementsByTagName('body')[0] );
-    			document.documentElement || ( document.documentElement = document.body.parentNode || document.getElementsByTagName('html')[0] );
-    			var h = document.documentElement;
+   				document.documentElement || ( document.documentElement = document.body.parentNode || document.getElementsByTagName('html')[0] );
+   				var h = document.documentElement;
     				h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal += ' no-lib' : h.className += ' no-lib';
-				 throw new TypeError( 'No se pudo cargar ninguna biblioteca' );
+			  throw new TypeError( 'No se pudo cargar ninguna biblioteca' );
 			} catch ( e ) {
 				//console.log('Upss.. ' + e.message);
 			}
 		}
 				
 		/*! Opcional | TODO Plain JS !*/
-		  document.write( '\u003Cscript type="text/javascript" src="script/' + ( libFuncName ? 'vanilla' : 'legacy' ) + '.js">\u003C/script>' );
+	 		document.write( '\u003Cscript type="text/javascript" src="script/' + ( libFuncName ? 'vanilla' : 'legacy' ) + '.js">\u003C/script>' );
+
 </script>
 ```
 
 ##### <a name="#es5-html5"></a>html5.html
 
-Si queremos diseñar una página cuya condición es, que los navegadores soporten características mínimas de `HTML5` y `ESMACScript5` sin hacer uso de polyfills. Recomiendo una posible solución:
+Si queremos diseñar una página web cuya condición es que los navegadores soporten al menos características mínimas de `HTML5` y `ESMACScript5` sin hacer uso de polyfills. Recomiendo esta solución:
 
 `<!-- {BLOQUE HEAD} -->`
 
 ```
-<!-- // TODO nuestro estilo CSS3+ -->
+<!-- // TODO nuestro estilo CSS2+ -->
 <link rel="stylesheet" href="css/main.css">
 
-<!-- Añadimos la clase js al elemento HTML -->
 <script>
-	var dialog = [];
-	document.documentElement.className += ' js';
+	var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+		dialog = [];
+	/*! Agregamos la clase de estilo js al elemento HTML !*/
+	document.documentElement.className = 'js';
 </script>
 
 <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
@@ -286,11 +330,15 @@ Si queremos diseñar una página cuya condición es, que los navegadores soporte
 
 ```
 <script>
+/*! Author: Pedro Macedo M. 
+	2016, v1.0.1
+!*/
 <!--
 	(function( global, document, undefined ) {
 		'use strict';
 
-		var HTML5test 			= true,
+		var // El valor de HTML5test activa o desactiva el test.
+			HTML5test 			= true,
 			isCanvasSupported	= !!isElementSupported('canvas');
 
 		/*
@@ -373,7 +421,7 @@ Si queremos diseñar una página cuya condición es, que los navegadores soporte
 
 		}());
 
-		/*! Para una condición más agresiva, cambie caniuse.HTML5 por caniuse.HTML5full  !*/
+		/*! Para una condición más agresiva, cambiar caniuse.HTML5 por caniuse.HTML5full  !*/
 		document.write( '\u003Cscript src=script/' + ( HTML5test && caniuse.ECMA262 >= 5 && caniuse.HTML5 &&  caniuse.CSS3Selector && caniuse.modernAPI ? (dialog.push('html5'), 'vanilla') : ( document.getElementById('browsehappy').style.cssText = 'display: block;' ,'legacy') ) + '.js>\u003C/script>' );
 
 	})( typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this, document );
@@ -434,10 +482,10 @@ Los navegadores que lo soportan son:
 
 ###Limitaciones
 
-Como no se hizo esperar, no todos los ingredientes salieron como uno se quiere. Algunas cosas no funcionaron asi que me sumergí al código para repararlo y esto son los resultados:
+Como no se hizo de esperar. No todos los ingredientes salieron como uno se quisiera. Algunas scripts no me funcionaron, asi que me sumergí al código para repararlo y esto son los resultados:
 
 * `jQuery v3.0.0-alpha1` funciona OK
-* `Zepto v1.1.6` solo hubo 2 instrucciones de código lo cual uno me dió migraña, medio día :P; me refiero a la linea #798
+* `Zepto v1.1.6` solo hubo 2 instrucciones de código lo cual uno me dió migraña, medio día :P; me refiero a esta instrucción:
 
 ```
 var dimensionProperty = dimension.replace(/./, function(m){ return m[0].toUpperCase() } )
@@ -447,7 +495,7 @@ Esto no funciona en IE<8. Se cambió por :
 var dimensionProperty = dimension.replace( /(^|\s)([a-z])/g , function(_, a, b) { return a + b.toUpperCase(); });
 ```
 
-Luego la linea #69
+Luego esta:
 
 ```
 function isDocument(obj)   { return obj != null && obj.nodeType === obj.DOCUMENT_NODE }
@@ -462,7 +510,8 @@ function isDocument(obj)   { return obj != null && obj.nodeType === 9 }
 ```
 if(onlyOne && isLastRule && selElements.length)
 
-Se cambió por 
+Se cambió por :
+
 if(onlyOne && isLastRule && selElements && selElements.length)
 ```
 
@@ -480,15 +529,18 @@ Por el momento, todo OK.
 
 ##Conclusiones
 
-Usando polyfill, `Zepto` ha sido más efectivo en todo sentido comparado con `jQuery`. Se pueden seguir agregando más polyfills a medida se exija, previamente si funciona; ya que puedes tener problemas de compatibilidad con los polyfill expuestos aquí.
+1. Usando polyfill, `Zepto` ha sido más efectivo en todo sentido comparado con `jQuery`. Se pueden seguir agregando más polyfills a medida se exija, previamente si funciona; ya que puedes tener problemas de compatibilidad con los polyfill usados aquí.
+2. Para las bibliotecas no todo funciona. Me refiero que a más antiguo es el navegador; más obstáculos tendremos. Por ejemplo, características como <em>Ajax, Effects y algunos pocos eventos</em>.
+3. En la mayoría de navegadores antiguos, al detectar un mínimo error de programación en javascript, te genera error, no pudiendo tener una apreciable experiencia. Hay que aprender a programar bien.
+4. Es perder el tiempo con `IE < 10`, pero al menos hay que hacerlo bien para `IE8+`
+5. `ECMAScript 6` aún está a medio camino de integrarse en todos los navegadores. Aunque Opera y Chrome están 91% en su desarrollo, para móviles están al 50%. Mejor aprendan a programar bién sobre ES5.
 
 ##<a name="#es6"></a>Recomendaciones
 
-Sugiero y enfatizo a que **uses ECMAScript 5+ para todos tus proyectos Web públicos usando alguna Biblioteca como Zepto** y así sea soportado tu programación con navegadores antiguos.
+1. Sugiero y enfatizo a que **uses ECMAScript 5+ y HTML5+ para tus proyectos Web públicos usando alguna Biblioteca como Zepto** , para que así tengas soporte con todos los navegadores desde los antiguos.
+2. Pero sería mejor, <mark>**Vanilla JS**</mark> con `ESMACScript 6 y HTML5.1` **te recomiendo al 100%** para proyectos Web de uso en Intranets.
+3. Aunque para uso público, añadiendo polyfills [es6-shim](https://github.com/es-shims/es6-shim) y si quieres también [system JS](https://github.com/systemjs/systemjs) al final de la etiqueta `HEAD`, según nuestro ejemplo arriba; puedes programar con el estándar **ECMAScript 6 al estilo Vanilla JS**.
 
-Pero si es mejor, <mark>**Vanilla JS**</mark> con `ESMACScript 6 y HTML5.1` **te recomiendo 100%** para proyectos Web de uso en Intranets.
-
-Aunque para uso público, añadiendo polyfills [es6-shim](https://github.com/es-shims/es6-shim) y si quieres también [system JS](https://github.com/systemjs/systemjs) al final de la etiqueta `HEAD`, según nuestro ejemplo arriba; puedes programar con el estándar **ECMAScript 6 al estilo Vanilla JS** code.
 
 Espero que te haya gustado el "Menú". Sugerencias y opiniones son bienvenidos.
 

@@ -2,7 +2,7 @@
 <html lang="es-PE">
 	<head>
 		<meta charset="UTF-8">
-		<title>No legacy</title>
+		<title>SisePuede: Puro HTML5 y ECMAScript 5+ para navegadores modernos!</title>
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
     	<meta name="description" content="SisePuede: Solución para navegadores modernos">
     	<meta content="Pedro Macedo Minchán" name="author">
@@ -12,9 +12,10 @@
 		<!-- // TODO nuestro estilo CSS2+ -->
 		<link rel="stylesheet" href="css/main.css">
 
-		<!-- Agregamos .js a elemento html -->
 		<script>
-			var dialog = [];
+			var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+				dialog = [];
+			/*! Agregamos la clase de estilo js al elemento HTML !*/
 	        document.documentElement.className = 'js';
 	    </script>
 
@@ -25,14 +26,14 @@
 	<!-- // El Cuerpo del Documento HTML5 -->
 	<body>
 		<header role="banner">
-			<h1>¡Si se puede!</h1>
+			<h1>¡SisePuede!</h1>
 			<h2>no-Legacys</h2>
 		</header>
 		<main role="main">
-			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a programar con <mark>ECMAScript 5!+ con FULL HTML5</mark> :) </p></blockquote>
+			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a programar con <mark>ECMAScript 5!+ y puro HTML5+</mark> :) </p></blockquote>
 		</main>
 		<footer role="contentinfo">
-			<p><em><span>Si te pones a pensar</span><span>,</span> <span>puedes hacer mucho más con esto..</span></em></p>
+			<p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
 		</footer>
 
 		<div id="preload">
@@ -50,7 +51,8 @@
 			(function( global, document, undefined ) {
 				'use strict';
 
-				var HTML5test 			= true,
+				var // El valor de HTML5test activa o desactiva el test.
+					HTML5test 			= true,
 					isCanvasSupported	= !!isElementSupported('canvas');
 
 				/*
@@ -62,9 +64,7 @@
 				
 				function isElementSupported( tag ) {
 					var element, toString = {}.toString;
-					 // (Safari 4 - 5.1, Chrome 14) y (Internet Explorer 8)
-					//global.HTMLElement = global.HTMLElement || global.HTMLGenericElement;
-					global.HTMLUnknownElement = global.HTMLUnknownElement || global.HTMLElement || global.HTMLGenericElement;
+					global.HTMLUnknownElement || ( global.HTMLUnknownElement = global.HTMLElement || global.HTMLGenericElement );
 				    if ( !global.HTMLUnknownElement ) {
 				        return undefined;
 				    }
@@ -137,7 +137,7 @@
 
 				}());
 				
-				/*! Para una condición más agresiva, cambie caniuse.HTML5 por caniuse.HTML5full  !*/
+				/*! Para una condición más agresiva, cambiar caniuse.HTML5 por caniuse.HTML5full  !*/
 				document.write( '\u003Cscript src=script/' + ( HTML5test && caniuse.ECMA262 >= 5 && caniuse.HTML5 &&  caniuse.CSS3Selector && caniuse.modernAPI ? (dialog.push('html5'), 'vanilla') : ( document.getElementById('browsehappy').style.cssText = 'display: block;' ,'legacy') ) + '.js>\u003C/script>' );
 
 			})( typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this, document );

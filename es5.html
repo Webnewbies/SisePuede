@@ -2,7 +2,7 @@
 <html class="no-js" lang="es-PE">
 	<head>
 		<meta charset="UTF-8">
-		<title>No legacy</title>
+		<title>SisePuede: Zepto en navegadores antiguos y modernos</title>
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
     	<meta name="description" content="SisePuede: Solución para navegadores antiguos y modernos">
     	<meta content="Pedro Macedo Minchán" name="author">
@@ -16,42 +16,35 @@
 		<script src="script/vendor/modernizr-custom.min.js"></script>
 
 		<script>
-			var // Nos servirá para agregar el estado de cada instrucción para luego ser usado
-				dialog = [];
+			var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+				dialogo = [];
 
 			if( !Modernizr.es5 ) {
+				dialogo[0] = 'shim';
 
-				dialog.push('no-es5');
+				/*! https://gist.github.com/jalbertbowden/5174156 !*/
+				var ieVersion = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[1] ) ) || NaN;
 
 				/*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
 				'article aside dialog figcaption figure footer header main nav section mark template'.replace(/\w+/g,function(n){document.createElement(n)});
 
 				/*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
-				if ( /*@cc_on!@*/true ) {
-	
-					/*! @ref https://github.com/termi/CSS_selector_engine !*/
-					document.write( '\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>' );
+				if ( /*@cc_on!@*/true  ) dialogo[1] = 'no-IE';
+				if( ieVersion ) dialogo[2] = 'IE';
 
-					// {Aquí se puede agregar más polyfills para ECMAScript <= 5: http://html5polyfills.com}
+				if ( ieVersion < 9 ) document.write( '\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>' );
 
-					dialog.push('no-IE');
-				} else {
-					/*! https://gist.github.com/jalbertbowden/5174156 !*/
-					var ieVersion = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[1] ) ) || NaN;
+				if ( ieVersion > 7 || /*@cc_on!@*/true ) document.write( '\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>' );
 
-					/*! @ref https://github.com/termi/ES5-DOM-SHIM !*/
-					if ( ieVersion == 8 ) document.write( '\u003Cscript src="script/vendor/legacy/a.ie8.js">\u003C/script>' );
-					if ( ieVersion < 8 ) document.write( '\u003Cscript src="script/vendor/legacy/a.ielt8.js">\u003C/script>' );
+				// {Aquí se puede agregar más polyfills: http://html5polyfills.com}
 
-					// {Aquí se puede agregar más polyfills sólo para IE<10: http://html5polyfills.com}
-
-					ieVersion || dialog.push('IE');
-				}
-				
-				/*! Añade métodos de ECMACScript 5/6 !*/
+				/*! Añadimos ECMACScript 5 Shim !*/
 				document.write( '\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>' );
+
+				/*! AQUÍ puedes agregar ECMACScript 6 Shim !*/
+
 			}
-			dialog.push('es-5');
+			dialogo[3] = 'es5';
 		</script>
 
 		<!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
@@ -64,14 +57,14 @@
 	<!-- // El Cuerpo del Documento HTML5 -->
 	<body>
 		<header role="banner">
-			<h1>¡Si se puede!</h1>
+			<h1>¡SisePuede!</h1>
 			<h2>no-Legacys</h2>
 		</header>
 		<main role="main">
 			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a usar <mark>Zepto</mark> :) </p></blockquote>
 		</main>
 		<footer role="contentinfo">
-			<p><em><span>Si te pones a pensar..</span><span>,</span> <span>puedes hacer mucho más con esto..</span></em></p>
+			<p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
 		</footer>
 
 		<div id="preload">
@@ -83,13 +76,14 @@
 
 <!-- =============== TODO javascript =============== -->
 		<!-- // Aquí se puede iniciar usando cualquier biblioteca. 
-			Podrias usar la dirección https://cdnjs.com/libraries/${LibraryName} 
+			Podrias usar la dirección https://cdnjs.com/libraries/${LibraryName}
+			para que descargues
 			donde LibraryName = ['Zepto', 'jQuery', 'MooTools', ...params];
 		-->
-		
-		<!-- /zepto/?-event-fx_methods-fx -->
+
+		<!-- /zepto/?-zepto-ie-event-ajax-detect-fx-touch  -->
 		<!--// <script src="http://zeptojs.com/zepto-docs.min.js"></script> -->
-        <script>window.Zepto || document.write( '\u003Cscript src="script/vendor/zepto.js">\u003C/script>' )</script>
+        <script>window.Zepto || document.write( '\u003Cscript src="script/vendor/zepto.min.js">\u003C/script>' )</script>
 
 		<script>
 			var libFuncName = null;
@@ -101,8 +95,8 @@
 					document.write( '\u003Cscript src="script/main.js">\u003C/script>' );
 				} else {
 					try {
-						dialog.push('no-lib');
-						/*! Agremamos .no-lib a la etiquena html si no se pudo cargar alguna biblioteca !*/
+						dialogo[4] = 'no-lib';
+						/*! Agremamos .no-lib a la etiquena html si es que no cargó alguna biblioteca !*/
 						document.body || ( document.body = document.getElementsByTagName('body')[0] );
     					document.documentElement || ( document.documentElement = document.body.parentNode || document.getElementsByTagName('html')[0] );
     					var h = document.documentElement;
@@ -115,6 +109,7 @@
 				
 				/*! Opcional | TODO Plain JS !*/
 		  		document.write( '\u003Cscript type="text/javascript" src="script/' + ( libFuncName ? 'vanilla' : 'legacy' ) + '.js">\u003C/script>' );
+
 		</script>
 <!-- =============== FIN javascript =============== -->
 

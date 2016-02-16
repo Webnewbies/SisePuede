@@ -1,5 +1,6 @@
-/*! Necesario para navegadores que no son IE usando CSS_selector_engine.js !*/
-if( dialog.indexOf('no-IE') != -1 ) { 
+/*! --- Necesario para navegadores que no son IE usando shim --- !*/
+
+if( dialogo.indexOf('no-IE') != -1 ) { 
 	document.querySelectorAll = function (selectors) {
 		return document.documentElement.querySelectorAll(selectors);
 	}
@@ -14,30 +15,45 @@ if( dialog.indexOf('no-IE') != -1 ) {
 	}
 }
 
-/*! Full Vanilla like Zepto: $.fadeIn(), $.prepend(), $.prependTo() !*/
+/*! --- FIN de lo necesario para CSS_selector_engine.js --- !*/
+
+
+/*! INICIO de Vanilla JS !*/
+
+/*! like Zepto: $.fadeIn(), $.fadeOut(), $.prepend(), $.prependTo() !*/
 function fadeIn(el, duration, display) {
-    var s = el.style || el[0].style, step = 25/(duration || 300);
+    var s = el.style || el[0].style,
+    	step = 25/(duration || 300);
     s.opacity = s.opacity || 0;
     s.display = display || "block";
     (function fade() { (s.opacity = parseFloat(s.opacity)+step) > 1 ? s.opacity = 1 : setTimeout(fade, 25); })();
 }
 
 function fadeOut(el, duration) {
-    var s = el.style || el[0].style, step = 25/(duration || 300);
+    var s = el.style || el[0].style,
+    	step = 25/(duration || 300);
     s.opacity = s.opacity || 1;
     (function fade() { (s.opacity -= step) < 0 ? s.display = "none" : setTimeout(fade, 25); })();
 }
 
-if( dialog.indexOf('html5') != -1 || dialog.indexOf('es5') != -1) { 
-	var ele = document.getElementById('preload');
-	if(ele.style.display != 'none') {
-		fadeOut(ele, 3000);
+var if_show_fade = function(){
+		var ele = document.getElementById('preload');
+		if(ele.style.display != 'none') {
+			fadeOut(ele, 2000);
+		}
 	}
-}else {
-	window.setTimeout(function () {
-		var el = document.getElementById('preload');
-		el.innerHTML += '<div class="isa_error">Esto no debe demorar más que 1 segundo. Vuelve a cargar la página.</div>';
-		var div = document.querySelector('.isa_error');
-		fadeIn(div, 1000);
-	}, 800);
-}
+
+if( dialogo.indexOf('html5') != -1 ) { 
+	if_show_fade();
+} else if( dialogo.indexOf('es5') != -1 ){
+		window.setTimeout(function () {
+			if_show_fade();
+		}, 800);
+	} else {
+		window.setTimeout(function () {
+			var el = document.getElementById('preload');
+			el.innerHTML += '<div class="isa_error">Esto no debe demorar más que 1 segundo. Vuelve a cargar la página.</div>';
+			var div = document.querySelector('.isa_error');
+			fadeIn(div, 1000);
+		}, 800);
+	}

@@ -1,4 +1,5 @@
 /*! Reset !*/
+
 html {
     font-size: 100%;
     overflow-y: scroll;
@@ -19,26 +20,42 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-body {
-  font-size: 100%; }
-  @media (min-width: 36em) {
-    body {
-      font-size: 110%; } }
-  @media (min-width: 58em) {
-    body {
-      font-size: 120%; } }
-  @media (min-width: 86em) {
-    body {
-      font-size: 130%; } }
-  @media (min-width: 115em) {
-    body {
-      font-size: 160%; } }
-  @media (min-width: 125em) {
-    body {
-      font-size: 170%; } }
-  @media (min-width: 145em) {
-    body {
-      font-size: 180%; } }
+html {
+    font-size: 200%;
+}
+@media all and (max-width: 240px), all and (max-height: 260px) {
+    html { font-size: 100%; }   
+}
+@media (min-width: 20.0625em) {
+    html {
+        font-size: 180%;
+    }
+}
+
+@media (min-width: 48.0625em) {
+    html {
+        font-size: 300%;
+    }
+}
+
+@media (min-width: 89.0625em) {
+    html {
+        font-size: 400%;
+    }
+}
+
+@media (min-width: 116.063em) {
+    html {
+        font-size: 500%;
+    }
+}
+
+@media (min-width:200.063em) {
+    html {
+        font-size: 600%;
+    }
+}
+
 
 /*! Personalizado !*/
 
@@ -49,7 +66,6 @@ html {
     margin: 0;
     border: 0;
     background: #eee;
-    font-size: 200%;
 }
 
 body {
@@ -60,11 +76,21 @@ body {
     margin: 0;
     border: 0;
     background: #eee;
+    font-size: 0.75em;
 }
 
+h1 {
+    font-size: 20px;
+    font-size: 1.250em;
+    font-size: 1.25rem;
+}
+body:last-child body {
+	padding-top: 5%;
+}
 header,
 main,
 footer {
+	display: block;
     margin: 0 5%;
     text-align: center;
     background: #fff;
@@ -75,11 +101,13 @@ footer {
 }
 
 h2 {
+    font-size: 16px;
+    font-size: 1rem;
     color: #aaa;
 }
 
 #preload {
-    background: #689f38;
+    background: #111;
     height: 100%;
     width: 100%;
     left: 0;
@@ -89,13 +117,13 @@ h2 {
 }
 
 #preload-content {
-    height: 100px;
+    height: 20px;
     left: 50%;
-    margin-left: -120px;
-    margin-top: -50px;
+    margin-left: -75px;
+    margin-top: -10px;
     position: absolute;
     top: 50%;
-    width: 240px;
+    width: 150px;
     z-index: 999;
     color: #fff;
 }
@@ -110,13 +138,13 @@ h2 {
     padding: 12px;
     color: #D8000C;
     background-color: #FFBABA;
-    font-size: 50%;
+    font-size: 100%;
     text-align: center;
 }
 
 #browsehappy {
     display: none;
-    font-size: 50%;
+    font-size: 100%;
 }
 
 blockquote {
@@ -138,6 +166,9 @@ blockquote:before {
 blockquote p {
     display: inline;
 }
+
 @media all and (max-width: 36em) {
-    footer{ font-size: 76%; }
+    footer {
+        font-size: 86%;
+    }
 }
