@@ -24,7 +24,7 @@ html {
     font-size: 200%;
 }
 @media all and (max-width: 240px), all and (max-height: 260px) {
-    html { font-size: 100%; }   
+    html { font-size: 140%; }   
 }
 @media (min-width: 20.0625em) {
     html {

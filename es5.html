@@ -32,6 +32,7 @@
 				if ( /*@cc_on!@*/true  ) dialogo[1] = 'no-IE';
 				if( ieVersion ) dialogo[2] = 'IE';
 
+				/*!! @ref https://gist.github.com/visualisierte/5891086 */
 				if ( ieVersion < 9 ) document.write( '\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>' );
 
 				if ( ieVersion > 7 || /*@cc_on!@*/true ) document.write( '\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>' );
@@ -79,6 +80,8 @@
 			Podrias usar la dirección https://cdnjs.com/libraries/${LibraryName}
 			para que descargues
 			donde LibraryName = ['Zepto', 'jQuery', 'MooTools', ...params];
+			// @ref http://blog.jquery.com/2015/07/13/jquery-3-0-and-jquery-compat-3-0-alpha-versions-released/
+			NOTA: para jQuery v3, es mejor usar la versión compat: https://code.jquery.com/jquery-compat-3.0.0-alpha1.js ya que ayuda a ser compatible con IE < 9, caso contrario NO.
 		-->
 
 		<!-- /zepto/?-zepto-ie-event-ajax-detect-fx-touch  -->
@@ -108,7 +111,7 @@
 				}
 				
 				/*! Opcional | TODO Plain JS !*/
-		  		document.write( '\u003Cscript type="text/javascript" src="script/' + ( libFuncName ? 'vanilla' : 'legacy' ) + '.js">\u003C/script>' );
+		  		document.write( '\u003Cscript type="text/javascript" src="script/' + ( libFuncName ? 'vanilla' : 'no-legacys' ) + '.js">\u003C/script>' );
 
 		</script>
 <!-- =============== FIN javascript =============== -->
