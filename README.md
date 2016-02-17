@@ -1,12 +1,13 @@
-# SisePuede v0.6.4
+# SisePuede v0.6.6
 Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad.. **Si se Puede**.
 
 :::js
 
 ```js
 <script>
-	var isHTML5=(function(){'use strict';return!this})()&&!!(window.HTMLCanvasElement&&window.localStorage&&document.querySelectorAll&&window.addEventListener)
-	;(function(k,is){document.write('<script src="script/'+(is?is:(k.add('no-'+is),'legacy'))+'.js"><\/script>')})(document.documentElement.classList,isHTML5?'vanilla':NaN)	
+	var isHTML5=!!(window.HTMLCanvasElement&&window.localStorage&&document.querySelectorAll),
+		isES5=(function(){'use strict';return!this})();
+	(function(k,is){document.write('<script src="script/'+(is?is:(k+=' legacy','no-legacys'))+'.js"><\/script>')})(document.documentElement.className,isHTML5&&isES5?'vanilla':NaN)
 </script>
 ```
 
@@ -148,25 +149,55 @@ Internet Explorer 7
 
 #### A quienes le gustaron
 
-Tabla de navegadores que soportan ECMAScript5 + HTML5 usando Polyfills, donde `Lib = [zepto1.1.6 , jquery3.0]`.
+##### ECMAScript5 y HTML5 con Polyfills
 
-Browsers		| Lib	| Vanilla JS
-------------	| ----	| ----------
-ie				| 	6+	|	5.5+
-bb				| 	5+	|	5+
-opera			|	7+	|	7+
-chrome			|	1+	|	1+
-safari			|	4+	|	4+
-yandex			|	1+	|	1+
-op_mob			|	6+	|	6+
-ie_mob			|	6+	|	6+
-android		|	1+	|	1+
-ios_saf		|	3+	|	3+
-ios_chr		|	1+	|	1+
-firefox		|	2+	|	3+
-fire_mob		|	1+	|	1+
+Tabla de navegadores que soportan ECMAScript5+ y HTML5 usando Polyfills, donde `Lib = [zepto1.1.6 , jquery3.0Compact]`.
 
-##### ECMAScript5 y HTML5.1 sin Polyfills
+Browsers		| Lib	| Legacy JS |	Vanilla JS
+------------	| ----	| ----------| ---------
+ie				| 	6+	|	6+		  |		9+
+bb				| 	5+	|	5+		  |		7+
+opera			|	7+	|	7+		  |		12+
+chrome			|	1+	|	1+		  |		19+
+safari			|	3+	|	4+		  |		5+
+yandex			|	1+	|	1+		  |		2+
+op_mob			|	6+	|	6+		  |		12+
+ie_mob			|	6+	|	6+		  |		10+
+saf_mob		|	3+	|	3+		  |		5+
+android		|	2+	|	1+		  |		3+
+ios_chr		|	1+	|	1+		  |		
+firefox		|	2+	|	3+		  |		4+
+SeaMonkey 	|	1+	|	2+		  |		2+
+fire_mob		|	1+	|	1+		  |		
+geck_mob		|	1+	|	1+		  |
+
+##### ECMAScript5+ y HTML5+ sin Polyfills
+
+Tabla de navegadores que soportan ECMAScript5.1+ y HTML5+ sin usar Polyfills, donde `Lib = [zepto1.1.6 , jquery3.0]`.
+
+Browsers		|Zepto	|jQuery|	Legacy JS
+------------	| ----	| ----	| ----------
+ie				| 	10+	|	11+	|	9+
+bb				| 	7+	|	7+	|	7+
+edge			|	12+	|	12+	|	12+	
+opera			|	10+	|11.6+	|	12+
+chrome			|	30+	|	1+	|	23+
+safari			|	6+	|	8+	|	5+
+yandex			|	1+	|	1+	|	1+
+op_mob			|	6+	|	6+	|	12.1+
+ie_mob			|	6+	|	9+	|	1+
+saf_mob		|	5+	|	3+	|	7+
+android		| 2.3+	| 	3+	|	3+
+ios_chr		|	1+	|	1+	|	1+
+firefox		|	24+	|	23+	|	21+
+SeaMonkey 	|	1+	| 2.6+	|	2+
+fire_mob		|	1+	|	4+	|	1+
+geck_mob		|	9+	|	9+	|	1+
+
+##### ECMAScript5+ y HTML5.1 sin Polyfills
+
+Lista de Navegadores que soportan HTML5.1 sin usar polyfills ni bibliotecas.
+
 ```
 "browsers": {
 		"chrome": "48+",
@@ -177,14 +208,16 @@ fire_mob		|	1+	|	1+
 		"ios_saf": "9+",
 		"ios_chr": "?",
 		"androit_chr": "47",
-		"android": "9.9",
+		"android": "47",
 		"op_mob": "33+",
 		"op-min": "5",
 		"ie_mob": "11",
 		"firefox_mob": "44",
-		"edge": "12+",
-		"bb": "10",
-		"yandex": "*"
+		"edge": "13+",
+		"bb": "10+",
+		"yandex": "1+",
+		"SeaMonkey": "2+",
+		"Gecko_mob":	"2+"
 	}
 ```
 
