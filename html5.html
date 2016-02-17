@@ -137,10 +137,16 @@
 
 				}());
 				
-				/*! Para una condición más agresiva, cambiar caniuse.HTML5 por caniuse.HTML5full  !*/
-				document.write( '\u003Cscript src="script/' + ( HTML5test && caniuse.ECMA262 >= 5 && caniuse.HTML5 &&  caniuse.CSS3Selector && caniuse.modernAPI ? (dialogo.push('html5'), 'vanilla') : ( document.getElementById('browsehappy').style.cssText = 'display: block;' ,'no-legacys') ) + '.js"><\/script>' );
+				/*! Para una condición más agresiva, cambiar caniuse.HTML5 por caniuse.HTML5full, Not Doc XML  !*/
+				document.write( '\u003Cscript src="script/' + ( HTML5test && caniuse.ECMA262 >= 5 && caniuse.HTML5 &&  caniuse.CSS3Selector && caniuse.modernAPI ? (dialogo.push('html5'), 'vanilla') : ( document.getElementById('browsehappy').style.display = 'block' ,'no-legacys') ) + '.js"><\/script>' );
 
 			})( typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this, document );
+			
+			/*! RESULTADOS:
+	    	Vanilla JS:
+	    	Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:5+, OP:12.1+  
+	    	Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+	    	!*/
 		//-->
 		</script>
 <!-- =============== FIN javascript =============== -->

@@ -1,19 +1,32 @@
-# SisePuede v0.6.6
-Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad.. **Si se Puede**.
+# SisePuede v0.7
+Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y (X)HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad.. **Si se Puede**.
 
 :::js
 
+<em>El código es soportado por: IE5+, OP7+, SA1+, FF1+, CH0.2, navegadores modernos y TODO móbiles</em>
+
 ```js
 <script>
-	var isHTML5=!!(window.HTMLCanvasElement&&window.localStorage&&document.querySelectorAll),
-		isES5=(function(){'use strict';return!this})();
-	(function(k,is){document.write('<script src="script/'+(is?is:(k+=' legacy','no-legacys'))+'.js"><\/script>')})(document.documentElement.className,isHTML5&&isES5?'vanilla':NaN)
+	(function(g,d){
+	    var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll),
+	        isES5=(function(){'use strict';return!this})();
+	    (function(k,is){d.write('\u003Cscript src="script/'+(!is?'vanilla':(k.className+=' no-es5',is))+'.js">\u003C/script>')}(d.documentElement||d.body.parentNode||d.body,isHTML5?NaN:'no-legacys'));
+	})("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document)
 </script>
 ```
 
-... mi nombre es Pedro (**Peter** :), y contaré de lo que se trata esto.
+<em>RESULTADOS:</em>
 
-## MENU del día: ECMAScript 5+ y HTML5+ para todos
+	isES5:
+		Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
+	    Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+	isHTML5:
+		Desktop: IE:9+:, EDG:12+, FF:3.6+, CHR:4+, SF:4+, OP:11.5+  
+	    Mobiles: SF:3.2+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+	    		
+... mi nombre es Pedro (**Peter** :), y contaré de qué trata TODO esto.
+
+## MENU del día: ECMAScript 5+ y (x)HTML5+ para todos
 Los objetivos del menú, es tratar a lo mayor posible; cabalgar en todos los navegadores.
 
 ### Menú
@@ -76,6 +89,7 @@ Crear una estructura básica de archivos para un sitio Web:
 	│───html5.html
 	│───index.html
 	│───a.ielt.htc
+	│───doctype.xhtml
 	└───[css]
    		├───main.css
     	├───no-js.css
@@ -92,28 +106,31 @@ Crear una estructura básica de archivos para un sitio Web:
    			├───a.js
     		├───a.ie8.js
     		├───a.ielt8.js
-    		├───getComputedStyle.js	
+    		├───getComputedStyle.js
+    		├───xhtml-document-write	
     		├───CSS_selector_engine.js	
     
 ##### .. del documento HTML5
 
 La estructura base para nuestros archivos HTML5 serán:
 
-	<!doctype html>
-	<html lang="en">
-	 <head>
+```html
+<!doctype html>
+<html lang="en">
+	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Document</title>
 		<!-- {BLOQUE HEAD} -->
 		<noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
-	 </head>
-	 <body>
+	</head>
+	<body>
 		<!-- {BLOQUE MAIN} -->
 		
 		<!-- {BLOQUE JAVASCRIPT} -->
 	 </body>
-	</html>
+</html>
+```
 
 #### Saborizantes
 
@@ -124,28 +141,39 @@ Para escribir código bajo el estándar `ECMAScript versión 5+`, es necesario i
 
 Crearemos un documento html5 **con polyfills** de la forma en que se puedan usar con navegadores que interpreten o no `ECMAScript 5+` y así usar **`Vanilla JS`**.
 
-[`Ver código`](https://github.com/Webnewbies/SisePuede/blob/master/index.html)
+[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/index.html)
 
 ##### <a name="library"></a>es5.html
 
 También crearemos un documento html5 que sea capaz de entender `ECMAScript 5+` **haciendo uso de cualquier polyfill** y usar con alguna biblioteca. Para este ejemplo, usaremos `Zepto v1.1.6`, como también se pudiera usar `jQuery vCompat-3.0.0-alpha1`
 
-[`Ver código`](https://github.com/Webnewbies/SisePuede/blob/master/es5.html)
+[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/es5.html)
 
 ##### <a name="#es5-html5"></a>html5.html
 
 Si queremos diseñar una página Web cuya condición es que los navegadores soporten al menos características mínimas de `HTML5` y `ECMAScript5` **sin hacer uso de polyfills**.
-Recomendado. [`Ver código`](https://github.com/Webnewbies/SisePuede/blob/master/html5.html)
+
+Recomendado. [`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/html5.html)
+
+##### <a name="#es5-xhtml5"></a>doctype.xhtml
+
+Si queremos diseñar una página Web XML cuya condición es que los navegadores soporten al menos características mínimas de `XHTML5` y `ECMAScript5` **sin hacer uso de polyfills**.
+
+Recomendado. [`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/doctype.xhtml)
 
 #### A Servir se ha dicho
 
 Y buen provecho... :)
 
-Opera 9
+Opera 9 en MAC
 ![Opera 9](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-13%20a%20las%2011.22.22%20p.m..png?raw=true)
 
-Internet Explorer 7
+Internet Explorer 7 en WinXPSP3
 ![Internet Explorer 7](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-16%20a%20las%2011.06.06%20p.m..png?raw=true)
+
+Internet Explorer 11 en Modo IE10 en Win10
+![Internet Explorer 11](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-17%20a%20las%2011.06.36%43p.m..png?raw=true)
+
 
 #### A quienes le gustaron
 
@@ -177,26 +205,26 @@ Tabla de navegadores que soportan ECMAScript5.1+ y HTML5+ sin usar Polyfills, do
 
 Browsers		|Zepto	|jQuery|	Legacy JS
 ------------	| ----	| ----	| ----------
-ie				| 	10+	|	11+	|	9+
+ie				| 	10+	|	11+	|	10+
 bb				| 	7+	|	7+	|	7+
 edge			|	12+	|	12+	|	12+	
-opera			|	10+	|11.6+	|	12+
-chrome			|	30+	|	1+	|	23+
+opera			|	10+	|11.6+	|	12.1+
+chrome			|	30+	|	1+	|	13+
 safari			|	6+	|	8+	|	5+
 yandex			|	1+	|	1+	|	1+
-op_mob			|	6+	|	6+	|	12.1+
-ie_mob			|	6+	|	9+	|	1+
-saf_mob		|	5+	|	3+	|	7+
+op_mob			|	6+	|	6+	|	12+
+ie_mob			|	6+	|	9+	|	10+
+saf_mob		|	5+	|	3+	|	5.1+
 android		| 2.3+	| 	3+	|	3+
 ios_chr		|	1+	|	1+	|	1+
-firefox		|	24+	|	23+	|	21+
+firefox		|	24+	|	23+	|	4+
 SeaMonkey 	|	1+	| 2.6+	|	2+
-fire_mob		|	1+	|	4+	|	1+
-geck_mob		|	9+	|	9+	|	1+
+fire_mob		|	1+	|	4+	|	4+
+geck_mob		|	9+	|	9+	|	4+
 
 ##### ECMAScript5+ y HTML5.1 sin Polyfills
 
-Lista de Navegadores que soportan HTML5.1 sin usar polyfills ni bibliotecas.
+Lista de Navegadores que soportan HTML5.1 y todas las características de `ESMACScript edición 5.1` sin usar polyfills ni bibliotecas.
 
 ```
 "browsers": {
@@ -217,7 +245,7 @@ Lista de Navegadores que soportan HTML5.1 sin usar polyfills ni bibliotecas.
 		"bb": "10+",
 		"yandex": "1+",
 		"SeaMonkey": "2+",
-		"Gecko_mob":	"2+"
+		"Gecko_mob": "2+"
 	}
 ```
 

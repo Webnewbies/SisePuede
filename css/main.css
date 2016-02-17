@@ -116,7 +116,7 @@ h2 {
     z-index: 998;
 }
 
-#preload-content {
+#preload-content{
     height: 20px;
     left: 50%;
     margin-left: -75px;
@@ -129,7 +129,7 @@ h2 {
 }
 
 .isa_error,
-#browsehappy {
+#browsehappy, #preload-content p {
     position: absolute;
     top: 50%;
     margin: 0 auto;
@@ -141,12 +141,24 @@ h2 {
     font-size: 100%;
     text-align: center;
 }
-
+#preload-content p:first-child {
+    background-color: #111;
+    color: #fff;
+}
 #browsehappy {
     display: none;
     font-size: 100%;
 }
 
+.isa_error, #preload-content{
+    width: 90%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+.no-es5 #browsehappy{
+    display: block;
+}
 blockquote {
     background: #f9f9f9;
     border-left: 10px solid #ccc;
