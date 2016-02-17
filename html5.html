@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es-PE">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
 		<title>SisePuede: Puro HTML5 y ECMAScript 5+ para navegadores modernos!</title>
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
     	<meta name="description" content="SisePuede: Solución para navegadores modernos">
@@ -15,7 +15,7 @@
 		<script>
 			var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
 				dialogo = [];
-			/*! Agregamos la clase de estilo js al elemento HTML !*/
+			/*! Agregamos la clase 'js' al elemento HTML !*/
 	        document.documentElement.className = 'js';
 	    </script>
 
@@ -138,7 +138,7 @@
 				}());
 				
 				/*! Para una condición más agresiva, cambiar caniuse.HTML5 por caniuse.HTML5full  !*/
-				document.write( '\u003Cscript src=script/' + ( HTML5test && caniuse.ECMA262 >= 5 && caniuse.HTML5 &&  caniuse.CSS3Selector && caniuse.modernAPI ? (dialogo.push('html5'), 'vanilla') : ( document.getElementById('browsehappy').style.cssText = 'display: block;' ,'no-legacys') ) + '.js>\u003C/script>' );
+				document.write( '\u003Cscript src="script/' + ( HTML5test && caniuse.ECMA262 >= 5 && caniuse.HTML5 &&  caniuse.CSS3Selector && caniuse.modernAPI ? (dialogo.push('html5'), 'vanilla') : ( document.getElementById('browsehappy').style.cssText = 'display: block;' ,'no-legacys') ) + '.js"><\/script>' );
 
 			})( typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this, document );
 		//-->

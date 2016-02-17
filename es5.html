@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="no-js" lang="es-PE">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
 		<title>SisePuede: Zepto en navegadores antiguos y modernos</title>
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
     	<meta name="description" content="SisePuede: Solución para navegadores antiguos y modernos">
@@ -39,10 +39,10 @@
 
 				// {Aquí se puede agregar más polyfills: http://html5polyfills.com}
 
-				/*! Añadimos ECMACScript 5 Shim !*/
+				/*! Añadimos ECMAScript 5 Shim !*/
 				document.write( '\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>' );
 
-				/*! AQUÍ puedes agregar ECMACScript 6 Shim !*/
+				/*! AQUÍ puedes agregar ECMAScript 6 Shim !*/
 
 			}
 			dialogo[3] = 'es5';
@@ -86,7 +86,7 @@
 
 		<!-- /zepto/?-zepto-ie-event-ajax-detect-fx-touch  -->
 		<!--// <script src="http://zeptojs.com/zepto-docs.min.js"></script> -->
-        <script>window.Zepto || document.write( '\u003Cscript src="script/vendor/zepto.min.js">\u003C/script>' )</script>
+        <script>window.$ || document.write( '\u003Cscript src="script/vendor/zepto.min.js">\u003C/script>' )</script>
 
 		<script>
 			var libFuncName = null;
@@ -99,11 +99,11 @@
 				} else {
 					try {
 						dialogo[4] = 'no-lib';
-						/*! Agremamos .no-lib a la etiquena html si es que no cargó alguna biblioteca !*/
+						/*! Agremamos .no-lib al elemento html para apoyo si es que no cargó alguna biblioteca !*/
 						document.body || ( document.body = document.getElementsByTagName('body')[0] );
     					document.documentElement || ( document.documentElement = document.body.parentNode || document.getElementsByTagName('html')[0] );
     					var h = document.documentElement;
-    						h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal += ' no-lib' : h.className += ' no-lib';
+    					(function(k){k+=' no-lib'})(h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className)	
 					  throw new TypeError( 'No se pudo cargar ninguna biblioteca' );
 					} catch ( e ) {
 						//console.log('Upss.. ' + e.message);
