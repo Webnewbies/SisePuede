@@ -116,7 +116,7 @@
 			        	what   = function(all){
 			                		var h = d.documentElement||d.body.parentNode||d.body,
 			                			k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
-			                		return all ? 'vanilla'
+			                		return all ? (k=k.replace(/(\s|^)no-es5(\s|$)/, ' '),'vanilla')
 			                				    : (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
 			                	};
 

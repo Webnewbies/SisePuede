@@ -1,12 +1,13 @@
-# SisePuede v0.7.2
+# SisePuede v0.7.3
 Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y (X)HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad.. **Si se Puede**.
 
-:::js
+:::js: <a name="#whatcaniuse"></a>**WhatCanIuse**
 
-<em>La presente solución es soportado por los siguiente: IE5+, OP7+, SF1+, FF1+, CH0.2, navegadores modernos y TODO móbiles</em>
+<em>La presente solución es soportado por los siguiente: IE5+, OP7+, SF1+, FF1+, CH0.2, navegadores modernos incluyendo móbiles</em>. Incluir al final de la etiqueta `</body>` antes de otros `<scripts>`.
 
 ```js
 <script>
+	/*! WhatCanIuse !*/
     (function(g, d) {
         var caniuse = (function() {
                 'use strict';
@@ -24,7 +25,7 @@ Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar 
 </script>
 ```
 
-`caniuse` usa el valor de `isES5` o `isHTML5` para obtener resultados deseados.
+`caniuse` usa el valor de `isES5`, `isHTML5` o `isES51` para obtener resultados deseados.
 
 `what()` define las instrucciones condicionales según el valor de `caniuse`.
 
@@ -34,18 +35,30 @@ Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar 
 	RESULTADOS:
 		Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
 	    Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+	    
 	var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll)
 	RESULTADOS:
 		Desktop: IE:9+:, EDG:12+, FF:3.6+, CHR:4+, SF:4+, OP:11.5+  
 	    Mobiles: SF:3.2+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+	    
+	var isES51 = Modernizr.es5;
+	RESULTADOS:
+		Desktop: IE:10+:, EDG:12+, FF:21+, CHR:23+, SF:6+, OP:15+
+	    Mobiles: SF:6.1+, -OP_mini:, DROIT:4.4+, BB:10+, OP_MOB:33+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
 
-Es una versión personalizada de:
+Básicamente mi propuesta es una versión modificada de: 
 
 ```js
-<script>document.write('\u003Cscript src="script/' + (caniuse?'vanilla':'non-legacy') + '.js">\u003C/script>')</script>
+<script>document.write('\u003Cscript src="script/' + (whatcaniuse?'vanilla':'non-legacy') + '.js">\u003C/script>')</script>
 ```
-	    		
+
+Lo cual traducido es:
+
+		What can i use? Vanilla code or non-legacy.
+		¿Qué puedo usar? Código de Vainilla o no-legado.    		
 ... mi nombre es Pedro (**Peter** :), y contaré de qué trata TODO esto.
+
+****
 
 ## MENU del día: ECMAScript 5+ y (X)HTML5+ para todos
 Los objetivos del menú, es tratar a lo mayor posible; cabalgar en todos los navegadores.
@@ -128,9 +141,9 @@ Crear una estructura básica de archivos para un sitio Web:
    			├───a.js
     		├───a.ie8.js
     		├───a.ielt8.js
-    		├───getComputedStyle.js
-    		├───xhtml-document-write	
-    		├───CSS_selector_engine.js	
+    		├───getComputedStyle.js	
+    		├───CSS_selector_engine.js
+    		├───xhtml-document-write.js	
     
 ##### .. del documento HTML5
 
@@ -163,25 +176,25 @@ Para escribir código bajo el estándar `ECMAScript versión 5+`, es necesario i
 
 Crearemos un documento html5 **con polyfills** de la forma en que se puedan usar con navegadores que interpreten o no de forma primitiva `ECMAScript 5+` y así usar **`Vanilla JS`**.
 
-[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/index.html)
+->[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/index.html)
 
 ##### <a name="library"></a>li5.html
 
 También crearemos un documento html5 que sea capaz de entender `ECMAScript 5+` **haciendo uso de cualquier polyfill** y usar con alguna biblioteca. Para este ejemplo, usaremos `Zepto v1.1.6`, como también se pudiera usar `jQuery vCompat-3.0.0-alpha1`
 
-[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/es5.html)
+->[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/es5.html)
 
 ##### <a name="#es5-html5"></a>5.html
 
 Si queremos diseñar una página Web cuya condición es que los navegadores soporten al menos características mínimas de `HTML5` y `ECMAScript5` **sin hacer uso de polyfills**.
 
-Recomendado. [`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/html5.html)
+->[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/html5.html)
 
 ##### <a name="#es5-xhtml5"></a>5.xhtml
 
 Si queremos diseñar una página Web XML cuya condición es que los navegadores soporten al menos características mínimas de `XHTML5` y `ECMAScript5` **sin hacer uso de polyfills**.
 
-Recomendado. [`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/doctype.xhtml)
+->[`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/doctype.xhtml)
 
 #### A Servir se ha dicho
 
@@ -190,11 +203,11 @@ Y buen provecho... :)
 Opera 9 en MAC
 ![Opera 9](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-13%20a%20las%2011.22.22%20p.m..png?raw=true)
 
-Internet Explorer 7 en WinXPSP3
+Internet Explorer 7 sobre WinXPSP3
 ![Internet Explorer 7](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-16%20a%20las%2011.06.06%20p.m..png?raw=true)
 
-Internet Explorer 11 en Modo IE10 en Win10
-![Internet Explorer 11](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-17%20a%20las%206.36.43%20p.m..png)
+Internet Explorer 11 en Modo IE10 sobre Win10
+![Internet Explorer 11](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-17%20a%20las%206.36.43%20p.m..png?raw=true)
 
 
 #### A quienes le gustaron
@@ -246,7 +259,7 @@ geck_mob		|	9+	|	9+	|	4+
 
 ##### ECMAScript5+ y HTML5.1 sin Polyfills
 
-Lista de Navegadores que soportan HTML5.1 y todas las características de `ESMACScript edición 5.1` sin usar polyfills ni bibliotecas.
+Versiones de navegadores actuales a la fecha 2016/02.
 
 ```
 "browsers": {
@@ -320,8 +333,8 @@ El resto; todo OK.
 
 ##Conclusiones
 
-1. Usando polyfill, `Zepto` ha sido más efectivo en todo sentido comparado con `jQuery`. Se pueden seguir agregando más polyfills a medida se exija, previamente probando su estabilidad y funcionamiento; ya que se puede tener problemas de compatibilidad con los polyfills usados aquí.
-2. No todas las bibliotecas funcionan efectivamente debido a la diversidad de navegadores existentes en el medio. Me refiero que, a más antiguo es el navegador; más obstáculos tendremos. En funcionalidades como <em>Ajax, Effects y algunos eventos</em>.
+1. Usando polyfill; `Zepto` ha sido más efectivo en todo sentido comparado con `jQuery`. Se pueden seguir agregando más polyfills a medida se exija, previamente probando su estabilidad y funcionamiento; ya que se puede tener problemas de compatibilidad con los polyfills usados aquí.
+2. No todas las bibliotecas funcionan efectivamente debido a la diversidad de navegadores existentes en el medio. Me refiero que, a más antiguo es el navegador; más obstáculos tendremos. En funcionalidades como <em>Ajax, Effects y algunos otros eventos</em>.
 3. En la mayoría de antiguos navegadores, un mínimo error de programación detectado en algún archivo.js; genera un de tipo "`Type_Error`", no pudiendo tener una apreciable experiencia. Hay que aprender a programar bien.
 4. Es perder el tiempo con `IE < 10`, pero al menos hay que hacerlo bien para `IE8+`
 5. `ECMAScript 6` aún está a medio camino de integrarse en todos los navegadores. Aunque Opera y Chrome están al 91% de su desarrollo, mientras que para móviles al 50%. Mejor aprendamos a programar BIÉN con `ES5` y luego pasar a `ES6`.
@@ -331,9 +344,13 @@ El resto; todo OK.
 1. Sugiero y enfatizo, **usar ECMAScript 5+ y HTML5+ para proyectos Web públicos; usando alguna Biblioteca como Zepto**, para que así tener soporte en todos los navegadores; desde los más antiguos.
 2. Pero sería mejor, <mark>**Vanilla JS**</mark> con `ESMACScript 6 y HTML5.1`. **Recomiendo 100%** para proyectos Web de uso en Intranets.
 3. Aunque para Internet, añadiendo polyfills [es6-shim](https://github.com/es-shims/es6-shim) y si quieres también [system JS](https://github.com/systemjs/systemjs) al final de la etiqueta `HEAD`, según nuestros ejemplos de archivos; Con esos ya puedes programar bajo el estándar **ECMAScript 6 con estilo Vanilla JS**.
+4. <a name="#wciu"></a>Si se desea programar con ECMAScript 5+ y con características mínimas de HTML5, SUGIERO la solución `WhatCanIuse` publicado al principio de este documento; anteponiendo dentro de las etiquetas `HEAD` un [Servicio de Polyfill](https://cdn.polyfill.io/v2/docs/examples).
 
+```js
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+```
 
-Espero que te haya gustado el "Menú". Sugerencias y opiniones son bienvenidos.
+Espero que le haya gustado el "Menú". Sugerencias y opiniones son bienvenidos.
 
 
 ... Saludos.
