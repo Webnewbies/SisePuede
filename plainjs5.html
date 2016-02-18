@@ -71,26 +71,36 @@
 			<h2>no-Legacys</h2>
 		</header>
 		<main role="main">
-			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Ahora podrás escribir con <mark>ECMAScript 5!+ usando Vanilla JS</mark> :) </p></blockquote>
+			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a usar <mark>Vanilla JS con ECMAScript 5!+</mark> :) </p></blockquote>
 		</main>
 		<footer role="contentinfo">
-			<p>¿Piensas que no se puede? <em>...haz tu mismo las pruebas.</em></p>
-			<p><a href="li5.html">Zepto</a> | <a href="5.html">HTML5</a> | <a href="5.xhtml">XHTML5</a> | <a href="plainjs5.html">PlainJS</a></p>
+			<p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
 		</footer>
 
 		<div id="preload">
 			<div id="preload-content">
 				<p>Bienvenido...</p>
+				<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor, <a href="http://browsehappy.com/">actualice tu navegador</a> para mejorar la experiencia.</p>
 			</div>
-			<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor, <a href="http://browsehappy.com/">actualice tu navegador</a> para mejorar la experiencia.</p>
 		</div>
 
 
 <!-- =============== TODO javascript =============== -->
-		<script>
-			/*! Opcional | TODO Plain JS !*/
-		  	document.write( '\u003Cscript type="text/javascript" src="script/' + ( dialogo.indexOf('es5') != -1 ? 'vanilla' : 'non-legacy' ) + '.js">\u003C/script>' );
-		</script>
+	<script>
+		/*! Opcional | TODO Plain JS !*/
+	    (function(g,d){
+	        var caniuse = dialogo.indexOf('es5')!= -1,
+	        	what 	= function(all){
+				        	var h = d.documentElement||d.body.parentNode||d.body,
+				        		k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
+				        return all 	? 'vanilla'
+				        			: (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
+				        };
+
+	        d.write('\u003Cscript src="script/'+what(caniuse)+'.js">\u003C/script>')
+
+	    })("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
+	</script>
 <!-- =============== FIN javascript =============== -->
 
 	</body>

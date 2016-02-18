@@ -71,6 +71,7 @@
 		<div id="preload">
 			<div id="preload-content">
 				<p>Bienvenido...</p>
+				<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor, <a href="http://browsehappy.com/">actualice tu navegador</a> para mejorar la experiencia.</p>
 			</div>
 		</div>
 
@@ -99,8 +100,8 @@
 				} else {
 					try {
 						dialogo[4] = 'no-lib';
-						/*! Agremamos .no-lib al elemento html para apoyo si es que no cargó alguna biblioteca !*/
-    					document.documentElement || ( document.documentElement = document.body.parentNode || document.getElementsByTagName('html')[0] );
+						/*! Agremamos .no-lib al elemento html para apoyo si es que no pudo cargar alguna biblioteca !*/
+    					document.documentElement || ( document.documentElement = document.body.parentNode || document.body );
     					var h = document.documentElement;
     					(function(k){k+=' no-lib'})(h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className)	
 					  throw new TypeError( 'No se pudo cargar ninguna biblioteca' );
@@ -110,8 +111,18 @@
 				}
 				
 				/*! Opcional | TODO Plain JS !*/
-		  		document.write( '\u003Cscript type="text/javascript" src="script/' + ( libFuncName ? 'vanilla' : 'no-legacys' ) + '.js">\u003C/script>' );
+				(function(g,d){
+			        var caniuse=libFuncName,
+			        	what   = function(all){
+			                		var h = d.documentElement||d.body.parentNode||d.body,
+			                			k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
+			                		return all ? 'vanilla'
+			                				    : (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
+			                	};
 
+			        d.write('\u003Cscript src="script/'+what(caniuse)+'.js">\u003C/script>')
+
+			    })("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
 		</script>
 <!-- =============== FIN javascript =============== -->
 

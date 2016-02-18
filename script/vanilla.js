@@ -43,7 +43,7 @@ var if_show_fade = function(){
 		}
 	}
 
-if( dialogo.indexOf('html5') != -1 ) { 
+if( dialogo.indexOf('html5') != -1 || dialogo.indexOf('xhtml5') != -1 ) { 
 	if_show_fade();
 } else if( dialogo.indexOf('es5') != -1 ){
 		window.setTimeout(function () {

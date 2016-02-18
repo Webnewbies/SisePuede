@@ -1,32 +1,53 @@
-# SisePuede v0.7
+# SisePuede v0.7.2
 Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y (X)HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad.. **Si se Puede**.
 
 :::js
 
-<em>El código es soportado por: IE5+, OP7+, SA1+, FF1+, CH0.2, navegadores modernos y TODO móbiles</em>
+<em>La presente solución es soportado por los siguiente: IE5+, OP7+, SF1+, FF1+, CH0.2, navegadores modernos y TODO móbiles</em>
 
 ```js
 <script>
-	(function(g,d){
-	    var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll),
-	        isES5=(function(){'use strict';return!this})();
-	    (function(k,is){d.write('\u003Cscript src="script/'+(!is?'vanilla':(k.className+=' no-es5',is))+'.js">\u003C/script>')}(d.documentElement||d.body.parentNode||d.body,isHTML5?NaN:'no-legacys'));
-	})("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document)
+    (function(g, d) {
+        var caniuse = (function() {
+                'use strict';
+                return !this
+            })(),
+            what = function(all) {
+                var h = d.documentElement || d.body.parentNode || d.body,
+                    k = h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className;
+                return all ? 'vanilla' : (k += ' no-es5', 'non-legacy');
+            };
+
+        d.write('\u003Cscript src="script/' + what(caniuse) + '.js">\u003C/script>')
+
+    })("undefined" !== typeof window ? window : "undefined" !== typeof global ? global : "undefined" !== typeof self ? self : this, document);
 </script>
 ```
 
-<em>RESULTADOS:</em>
+`caniuse` usa el valor de `isES5` o `isHTML5` para obtener resultados deseados.
 
-	isES5:
+`what()` define las instrucciones condicionales según el valor de `caniuse`.
+
+<em>RESULTADOS de la investigación:</em>
+
+	var isES5 = (function(){'use strict';return!this})();
+	RESULTADOS:
 		Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
 	    Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
-	isHTML5:
+	var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll)
+	RESULTADOS:
 		Desktop: IE:9+:, EDG:12+, FF:3.6+, CHR:4+, SF:4+, OP:11.5+  
 	    Mobiles: SF:3.2+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+
+Es una versión personalizada de:
+
+```js
+<script>document.write('\u003Cscript src="script/' + (caniuse?'vanilla':'non-legacy') + '.js">\u003C/script>')</script>
+```
 	    		
 ... mi nombre es Pedro (**Peter** :), y contaré de qué trata TODO esto.
 
-## MENU del día: ECMAScript 5+ y (x)HTML5+ para todos
+## MENU del día: ECMAScript 5+ y (X)HTML5+ para todos
 Los objetivos del menú, es tratar a lo mayor posible; cabalgar en todos los navegadores.
 
 ### Menú
@@ -84,12 +105,13 @@ A continuación empezaremos la cocción de nuestros alimentos.
 ##### .. de archivos
 
 Crear una estructura básica de archivos para un sitio Web:
-
-	│───es5.html
-	│───html5.html
-	│───index.html
+	
+	│───5.html
+	│───5.xhtml
+	│───li5.html
 	│───a.ielt.htc
-	│───doctype.xhtml
+	│───index.html
+	│───plainjs.html
 	└───[css]
    		├───main.css
     	├───no-js.css
@@ -97,7 +119,7 @@ Crear una estructura básica de archivos para un sitio Web:
     └───[script]
    		├───main.js
    		├───vanilla.js
-    	├───no-legacys.js
+    	├───non-legacy.js
     └───[vendor]
    		├───zepto.js
    		├───jquery.js
@@ -137,25 +159,25 @@ La estructura base para nuestros archivos HTML5 serán:
 Ahora le ponemos sabor. 
 Para escribir código bajo el estándar `ECMAScript versión 5+`, es necesario introducir las siguientes instrucciones dentro de los bloques según plantilla:
 
-##### <a name="vanilla"></a>index.html
+##### <a name="vanilla"></a>plainjs.html
 
-Crearemos un documento html5 **con polyfills** de la forma en que se puedan usar con navegadores que interpreten o no `ECMAScript 5+` y así usar **`Vanilla JS`**.
+Crearemos un documento html5 **con polyfills** de la forma en que se puedan usar con navegadores que interpreten o no de forma primitiva `ECMAScript 5+` y así usar **`Vanilla JS`**.
 
 [`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/index.html)
 
-##### <a name="library"></a>es5.html
+##### <a name="library"></a>li5.html
 
 También crearemos un documento html5 que sea capaz de entender `ECMAScript 5+` **haciendo uso de cualquier polyfill** y usar con alguna biblioteca. Para este ejemplo, usaremos `Zepto v1.1.6`, como también se pudiera usar `jQuery vCompat-3.0.0-alpha1`
 
 [`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/es5.html)
 
-##### <a name="#es5-html5"></a>html5.html
+##### <a name="#es5-html5"></a>5.html
 
 Si queremos diseñar una página Web cuya condición es que los navegadores soporten al menos características mínimas de `HTML5` y `ECMAScript5` **sin hacer uso de polyfills**.
 
 Recomendado. [`Ver código fuente`](https://github.com/Webnewbies/SisePuede/blob/master/html5.html)
 
-##### <a name="#es5-xhtml5"></a>doctype.xhtml
+##### <a name="#es5-xhtml5"></a>5.xhtml
 
 Si queremos diseñar una página Web XML cuya condición es que los navegadores soporten al menos características mínimas de `XHTML5` y `ECMAScript5` **sin hacer uso de polyfills**.
 
@@ -172,7 +194,7 @@ Internet Explorer 7 en WinXPSP3
 ![Internet Explorer 7](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-16%20a%20las%2011.06.06%20p.m..png?raw=true)
 
 Internet Explorer 11 en Modo IE10 en Win10
-![Internet Explorer 11](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-17%20a%20las%2011.06.36%43p.m..png?raw=true)
+![Internet Explorer 11](https://github.com/Webnewbies/SisePuede/blob/master/img/Captura%20de%20pantalla%202016-02-17%20a%20las%206.36.43%20p.m..png)
 
 
 #### A quienes le gustaron

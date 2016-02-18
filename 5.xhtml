@@ -57,15 +57,25 @@
 
 <!-- =============== TODO javascript =============== -->
        <script type="text/javascript"><!--//--><![CDATA[//><!--
-			/*! El código es soportado por: IE5+, OP7+, SA1+, FF1+, CH0.2, navegadores modernos y TODO mobiles !*/
-			(function(g,d){
-			    var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll),
+			/*! El código es soportado por: IE5+, OP7+, SF1+, FF1+, CH0.2, navegadores modernos y TODO mobiles !*/
+		    (function(g,d){
+		        var caniuse = (function(){'use strict';return!this})(),
+		        	what 	= function(all){
+				        		var h = d.documentElement||d.body.parentNode||d.body,
+				        			k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
+				        		return all ? (dialogo.push('xhtml5'),'vanilla')
+				        				 : (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
+				        	};
+
+				        d.write('\u003Cscript src="script/'+what(caniuse)+'.js">\u003C/script>')
+
+		    })("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
+		
+			/*! var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll),
 			        isES5=(function(){'use strict';return!this})();
-			    (function(k,is){d.write('\u003Cscript src="script/'+(!is?(dialogo.push('html5'),'vanilla'):(k.className+=' no-es5',is))+'.js">\u003C/script>')}(d.documentElement||d.body.parentNode||d.body,isES5&&isHTML5?NaN:'no-legacys'));
-			})("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
-			/*! RESULTADOS:
+				RESULTADOS:
 			    	Vanilla JS:
-			    	Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:5+, OP:12.1+  
+			    	Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
 			    	Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
 			!*/
 		//--><!]]></script>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es-PE">
+	<head>
+		<meta charset="utf-8">
+		<title>SisePuede: Puro HTML5 y ECMAScript 5+ para navegadores modernos!</title>
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+    	<meta name="description" content="SisePuede: Solución para navegadores modernos">
+    	<meta content="Pedro Macedo Minchán" name="author">
+    	<meta name="contact" content="pedro.macedo.minchan@gmail.com">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		
+		<!-- // TODO nuestro estilo CSS2+ -->
+		<link rel="stylesheet" href="css/main.css">
+
+		<script>
+			var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+				dialogo = [];
+			/*! Agregamos la clase 'js' al elemento HTML !*/
+	        document.documentElement.className = 'js';
+	    </script>
+
+		<!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
+		<noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
+	</head>
+	
+	<!-- // El Cuerpo del Documento HTML5 -->
+	<body>
+		<header role="banner">
+			<h1>¡SisePuede!</h1>
+			<h2>no-Legacys</h2>
+		</header>
+		<main role="main">
+			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a programar con <mark>ECMAScript 5!+ y puro HTML5+</mark> :) </p></blockquote>
+		</main>
+		<footer role="contentinfo">
+			<p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
+		</footer>
+
+		<div id="preload">
+			<div id="preload-content">
+				<p>Bienvenido...</p>
+				<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor <a href="http://browsehappy.com/">actualize su navegador</a> para una mejor experiencia.</p>
+			</div>
+		</div>
+
+
+
+<!-- =============== TODO javascript =============== -->
+		<script><!--
+	    (function(g,d){
+	        var caniuse	=	(function(){'use strict';return!this})(),
+	        	what 	= 	function(all){
+				        		var h = d.documentElement||d.body.parentNode||d.body,
+				        			k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
+				        		return all ? (dialogo.push('html5'),'vanilla')
+				        				  : (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
+				        	};
+
+				        d.write('\u003Cscript src="script/'+what(caniuse)+'.js">\u003C/script>')
+
+				    })("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
+		//--></script>
+<!-- =============== FIN javascript =============== -->
+
+	</body>
+</html>
