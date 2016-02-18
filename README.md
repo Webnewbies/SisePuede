@@ -1,4 +1,4 @@
-# SisePuede v0.7.4
+# SisePuede v0.7.5
 Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5+ y (X)HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo alusión de lo que se cree no poder, pero que en realidad.. **Si se Puede**.
 
 :::Proyecto: 
@@ -8,7 +8,14 @@ Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar 
 
 ```js
 <script>
-	/*! WhatCanIuse !*/
+	/*! ⒲⒣⒜⒯ ⒞⒜⒩ ⒤ ⒰⒮⒠
+		/ Una solución personalizada para aventurarse con Vanilla JS
+		/ By Pedro Macedo M.
+		/ Dominio Público / Public Domain.
+		// NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+		// @source https://github.com/Webnewbies/SisePuede
+	!*/
+	/* global self, document */
     (function(g, d) {
         var caniuse = (function() {
                 'use strict';
