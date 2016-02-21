@@ -1,69 +1,87 @@
 <!doctype html>
 <html lang="es-PE">
-	<head>
-		<meta charset="utf-8">
-		<title>SisePuede: Puro HTML5 y ECMAScript 5+ para navegadores modernos!</title>
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-    	<meta name="description" content="SisePuede: Solución para navegadores modernos">
-    	<meta content="Pedro Macedo Minchán" name="author">
-    	<meta name="contact" content="pedro.macedo.minchan@gmail.com">
-    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		
-		<!-- // TODO nuestro estilo CSS2+ -->
-		<link rel="stylesheet" href="css/main.css">
+<head>
+    <meta charset="utf-8">
+    <title>SisePuede: Puro HTML5 y ECMAScript 5+ para navegadores modernos!</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="SisePuede: Solución para navegadores modernos">
+    <meta content="Pedro Macedo Minchán" name="author">
+    <meta name="contact" content="pedro.macedo.minchan@gmail.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <!-- // TODO nuestro estilo CSS2+ -->
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+    var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+        dialogo = [];
+    /*! Agregamos la clase 'js' al elemento HTML !*/
+    document.documentElement.className = 'js';
+    </script>
+    <!-- // Usamos los servicios de Polyfill para ES5 -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+    
+    <!-- @ref https://github.com/paulmillr/es6-shim -->
+    <script src="script/vendor/es6-shim.min.js"></script>
 
-		<script>
-			var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
-				dialogo = [];
-			/*! Agregamos la clase 'js' al elemento HTML !*/
-	        document.documentElement.className = 'js';
-	    </script>
+    <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
+    <noscript>
+        <link rel="stylesheet" href="css/no-js.css">
+    </noscript>
+</head>
+<!-- // El Cuerpo del Documento HTML5 -->
 
-	    <!-- // Usamos los servicios de Polyfill para ES5 -->
-	    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es5"></script>
+<body>
+    <header role="banner">
+        <h1>¡SisePuede!</h1>
+        <h2>no-Legacys</h2>
+    </header>
+    <main role="main">
+        <blockquote cite="http://www.ecma-international.org/ecma-262/5.1/">
+            <p>¡Empieza ahora a programar con
+                <mark>ECMAScript 6+ y puro HTML5+</mark> :) </p>
+        </blockquote>
+    </main>
+    <footer role="contentinfo">
+        <p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
+    </footer>
+    <div id="preload">
+        <div id="preload-content">
+            <p>Bienvenido...</p>
+            <p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor <a href="http://browsehappy.com/">actualize su navegador</a> para una mejor experiencia.</p>
+        </div>
+    </div>
+    <!-- =============== TODO javascript =============== -->
+    <script>
+    <!--
+    (function(what, can, i, use) {
+        'use strict';
 
-		<!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
-		<noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
-	</head>
-	
-	<!-- // El Cuerpo del Documento HTML5 -->
-	<body>
-		<header role="banner">
-			<h1>¡SisePuede!</h1>
-			<h2>no-Legacys</h2>
-		</header>
-		<main role="main">
-			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a programar con <mark>ECMAScript 5!+ y puro HTML5+</mark> :) </p></blockquote>
-		</main>
-		<footer role="contentinfo">
-			<p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
-		</footer>
+        use = use || !this;
 
-		<div id="preload">
-			<div id="preload-content">
-				<p>Bienvenido...</p>
-				<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor <a href="http://browsehappy.com/">actualize su navegador</a> para una mejor experiencia.</p>
-			</div>
-		</div>
+        what(can, i, use);
+
+        i.write('\u003Cscript src="script/' + (use ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+
+    })(typeof what === 'function' ? what : function() {}, (function() {
+        return this || (1, eval)('this');
+    }()), document, (undefined = 'whatcaniuse') && typeof undefined == 'undefined');
 
 
+    function what(w, d, c) {
+        if (!c) {
+            h = d.documentElement || d.body.parentNode || d.body,
+                k = h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className;
+            k += ' no-es5';
+            d.getElementById('browsehappy').style.display = 'block'
+        } else {
+            dialogo.push('html5');
+        }
+        return;
+    }
 
-<!-- =============== TODO javascript =============== -->
-		<script><!--
-	    (function(g,d){
-	        var caniuse	=	(function(){'use strict';return!this})(),
-	        	what 	= 	function(all){
-				        		var h = d.documentElement||d.body.parentNode||d.body,
-				        			k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
-				        		return all ? (dialogo.push('html5'),'vanilla')
-				        				  : (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
-				        	};
+    //-->
+    </script>
+    <!-- =============== FIN javascript =============== -->
+</body>
 
-				        d.write('\u003Cscript src="script/'+what(caniuse)+'.js">\u003C/script>')
-
-				    })("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
-		//--></script>
-<!-- =============== FIN javascript =============== -->
-
-	</body>
 </html>
+

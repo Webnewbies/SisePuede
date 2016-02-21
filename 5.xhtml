@@ -1,93 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html version="-//W3C//DTD XHTML 1.1//EN"
-      xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+<html version="-//W3C//DTD XHTML 1.1//EN" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/1999/xhtml
                           http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd">
-    <!-- // @ref https://wiki.whatwg.org/wiki/HTML_vs._XHTML -->
-    <head>
-        <meta charset="utf-8" />
-        <title>SisePuede: Puro XHTML5 y ECMAScript 5+ para navegadores modernos!</title>
-       	<meta http-equiv="x-ua-compatible" content="ie=edge" />
-    	<meta name="description" content="SisePuede: Solución para navegadores modernos" />
-    	<meta content="Pedro Macedo Minchán" name="author" />
-    	<meta name="contact" content="pedro.macedo.minchan@gmail.com" />
-    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-		
-		<!-- // TODO nuestro estilo CSS2+ -->
-		<link rel="stylesheet" href="css/main.css" />
+<!-- // @ref https://wiki.whatwg.org/wiki/HTML_vs._XHTML -->
 
-		<script type="text/javascript"><!--//--><![CDATA[//><!--
-			var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
-				dialogo = [];
-			/*! Agregamos la clase 'js' al elemento HTML !*/
-	        document.documentElement.className = 'js';
-	   //--><!]]></script>
+<head>
+    <meta charset="utf-8" />
+    <title>SisePuede: Puro XHTML5 y ECMAScript 5+ para navegadores modernos!</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="SisePuede: Solución para navegadores modernos" />
+    <meta content="Pedro Macedo Minchán" name="author" />
+    <meta name="contact" content="pedro.macedo.minchan@gmail.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <!-- // TODO nuestro estilo CSS2+ -->
+    <link rel="stylesheet" href="css/main.css" />
+    <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+        dialogo = [];
+    /*! Agregamos la clase 'js' al elemento HTML !*/
+    document.documentElement.className = 'js';
+    //--><!]]>
+    </script>
+    <!-- // Soporte a document.write() para documentos XML
+            @ref https://github.com/westonruter/xhtml-document-write -->
+    <script type="text/javascript" src="script/vendor/legacy/xhtml-document-write.js"></script>
+    <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
+    <noscript>
+        <link rel="stylesheet" href="css/no-js.css" />
+    </noscript>
+</head>
+<!-- // El Cuerpo del Documento HTML5 -->
 
-	    <!-- // Soporte a document.write() para documentos XML
-	    	@ref https://github.com/westonruter/xhtml-document-write -->
-        <script type="text/javascript" src="script/vendor/legacy/xhtml-document-write.js"></script>
+<body>
+    <header role="banner">
+        <h1>¡SisePuede!</h1>
+        <h2>no-Legacys</h2>
+    </header>
+    <main role="main">
+        <blockquote cite="http://www.ecma-international.org/ecma-262/5.1/">
+            <p>¡Empieza ahora a programar con
+                <mark>ECMAScript 5!+ y puro XML + HTML5 = XHTML5+</mark> :) </p>
+        </blockquote>
+    </main>
+    <footer role="contentinfo">
+        <p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
+    </footer>
+    <div id="preload">
+        <div id="preload-content">
+            <p>Bienvenido...</p>
+            <p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor <a href="http://browsehappy.com/">actualize su navegador</a> para una mejor experiencia.</p>
+        </div>
+    </div>
+    <!-- =============== TODO javascript =============== -->
+    <script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    (function(what, can, i, use) {
+        'use strict';
 
-        <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
-		<noscript><link rel="stylesheet" href="css/no-js.css" /></noscript>
-    </head>
-	<!-- // El Cuerpo del Documento HTML5 -->
-	<body>
-		<header role="banner">
-			<h1>¡SisePuede!</h1>
-			<h2>no-Legacys</h2>
-		</header>
-		<main role="main">
-			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a programar con <mark>ECMAScript 5!+ y puro XML + HTML5 = XHTML5+</mark> :) </p></blockquote>
-		</main>
-		<footer role="contentinfo">
-			<p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
-		</footer>
+        use = use || !this;
 
-		<div id="preload">
-			<div id="preload-content">
-				<p>Bienvenido...</p>
-				<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor <a href="http://browsehappy.com/">actualize su navegador</a> para una mejor experiencia.</p>
-			</div>
-		</div>
+        what(can, i, use);
 
+        i.write('\u003Cscript src="script/' + (use ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+
+    })(typeof what === 'function' ? what : function() {}, (function() {
+        return this || (1, eval)('this');
+    }()), document, (undefined = 'whatcaniuse') && typeof undefined == 'undefined' );
+
+    function what(w, d, c) {
+        if (!c) {
+            h = d.documentElement || d.body.parentNode || d.body,
+                k = h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className;
+            k += ' no-es5';
+            d.getElementById('browsehappy').style.display = 'block';
+        } else {
+            dialogo.push('xhtml5');
+        }
+        return;
+    }
 
 
-<!-- =============== TODO javascript =============== -->
-       <script type="text/javascript"><!--//--><![CDATA[//><!--
-			/*! El código es soportado por: IE5+, OP7+, SF1+, FF1+, CH0.2, navegadores modernos y TODO mobiles !*/
-		    (function(g,d){
-		        var caniuse = (function(){'use strict';return!this})(),
-		        	what 	= function(all){
-				        		var h = d.documentElement||d.body.parentNode||d.body,
-				        			k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
-				        		return all ? (dialogo.push('xhtml5'),'vanilla')
-				        				 : (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
-				        	};
 
-				        d.write('\u003Cscript src="script/'+what(caniuse)+'.js">\u003C/script>')
+    /*! 
+        RESULTADOS:
+            Vanilla JS:
+            Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
+            Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+    !*/
 
-		    })("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
-		
-			/*! var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll),
-			        isES5=(function(){'use strict';return!this})();
-				RESULTADOS:
-			    	Vanilla JS:
-			    	Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
-			    	Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
-			!*/
-		//--><!]]></script>
+    //--><!]]>
+    </script>
+    <!--    
+        Variables que se pueden usar en la condionante, valor de 'use':
+        var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll),
+        var isUndefined = (undefined = 'whatcaniuse') && typeof undefined == 'undefined';
 
-	<!-- 	
-		RESULTADOS:
-			isES5:
-				Desktop: IE:10+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
-	    		Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
-	    	isHTML5:
-				Desktop: IE:9+:, EDG:12+, FF:3.6+, CHR:4+, SF:4+, OP:11.5+  
-	    		Mobiles: SF:3.2+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
-	-->
-    </body>
+        RESULTADOS según variables:
+            isUndefined:
+                Desktop: IE:9+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
+                Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+            isHTML5:
+                Desktop: IE:9+:, EDG:12+, FF:3.6+, CHR:4+, SF:4+, OP:11.5+  
+                Mobiles: SF:3.2+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+    -->
+</body>
+
 </html>
+

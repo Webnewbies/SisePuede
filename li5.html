@@ -1,130 +1,155 @@
 <!doctype html>
 <html class="no-js" lang="es-PE">
-	<head>
-		<meta charset="utf-8">
-		<title>SisePuede: Zepto en navegadores antiguos y modernos</title>
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-    	<meta name="description" content="SisePuede: Solución para navegadores antiguos y modernos">
-    	<meta content="Pedro Macedo Minchán" name="author">
-    	<meta name="contact" content="pedro.macedo.minchan@gmail.com">
-    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		
-		<!-- // TODO nuestro estilo CSS2+ -->
-		<link rel="stylesheet" href="css/main.css">
+<head>
+    <meta charset="utf-8">
+    <title>SisePuede: Zepto en navegadores antiguos y modernos</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="SisePuede: Solución para navegadores antiguos y modernos">
+    <meta content="Pedro Macedo Minchán" name="author">
+    <meta name="contact" content="pedro.macedo.minchan@gmail.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <!-- // TODO nuestro estilo CSS2+ -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- http://modernizr.com/download/?-es5-setclasses -->
+    <script src="script/vendor/modernizr-custom.min.js"></script>
+    
+    <script>
+    var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+        dialogo = [];
 
-		<!-- http://modernizr.com/download/?-es5-setclasses -->
-		<script src="script/vendor/modernizr-custom.min.js"></script>
+    if ( !Modernizr.es5 ) {
+        dialogo[0] = 'shim';
 
-		<script>
-			var //Nos servirá para iniciar diálogo por cada instrucción de ser necesario
-				dialogo = [];
+        /*! https://gist.github.com/jalbertbowden/5174156 !*/
+        var ieVersion = (!!window.ActiveXObject && +(/msie\s(\d+)/i.exec(navigator.userAgent)[1])) || NaN;
 
-			if( !Modernizr.es5 ) {
-				dialogo[0] = 'shim';
+        /*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
+        'article aside dialog figcaption figure footer header main nav section mark template'.replace(/\w+/g, function(n) {
+            document.createElement(n)
+        });
 
-				/*! https://gist.github.com/jalbertbowden/5174156 !*/
-				var ieVersion = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[1] ) ) || NaN;
+        /*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
+        if ( /*@cc_on!@*/ true) dialogo[1] = 'no-IE';
+        if (ieVersion) dialogo[2] = 'IE';
 
-				/*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
-				'article aside dialog figcaption figure footer header main nav section mark template'.replace(/\w+/g,function(n){document.createElement(n)});
+        /*!! @ref https://gist.github.com/visualisierte/5891086 */
+        if (ieVersion < 9) document.write('\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>');
 
-				/*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
-				if ( /*@cc_on!@*/true  ) dialogo[1] = 'no-IE';
-				if( ieVersion ) dialogo[2] = 'IE';
+        if (ieVersion > 7 || /*@cc_on!@*/ true) document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>');
 
-				/*!! @ref https://gist.github.com/visualisierte/5891086 */
-				if ( ieVersion < 9 ) document.write( '\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>' );
+        // {Aquí se puede agregar más polyfills: http://html5polyfills.com}
 
-				if ( ieVersion > 7 || /*@cc_on!@*/true ) document.write( '\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>' );
+        /*! Añadimos ECMAScript 5 Shim !*/
+        document.write('\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>');
 
-				// {Aquí se puede agregar más polyfills: http://html5polyfills.com}
+        /*! AQUÍ puedes agregar ECMAScript 6 Shim !*/
 
-				/*! Añadimos ECMAScript 5 Shim !*/
-				document.write( '\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>' );
+    }
+    dialogo[3] = 'es5';
+    </script>
+    <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
+    <noscript>
+        <link rel="stylesheet" href="css/no-js.css">
+    </noscript>
+    <!-- // Cuando no se haya podido iniciar ninguna biblioteca -->
+    <link rel="stylesheet" href="css/no-lib.css">
+</head>
+<!-- // El Cuerpo del Documento HTML5 -->
 
-				/*! AQUÍ puedes agregar ECMAScript 6 Shim !*/
+<body>
+    <header role="banner">
+        <h1>¡SisePuede!</h1>
+        <h2>no-Legacys</h2>
+    </header>
+    <main role="main">
+        <blockquote cite="http://www.ecma-international.org/ecma-262/5.1/">
+            <p>¡Empieza ahora a usar
+                <mark>Zepto</mark> :) </p>
+        </blockquote>
+    </main>
+    <footer role="contentinfo">
+        <p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
+    </footer>
+    <div id="preload">
+        <div id="preload-content">
+            <p>Bienvenido...</p>
+            <p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor, <a href="http://browsehappy.com/">actualice tu navegador</a> para mejorar la experiencia.</p>
+        </div>
+    </div>
+    <!-- =============== TODO javascript =============== -->
+    <!-- // Aquí se puede iniciar usando cualquier biblioteca. 
+            Podrias usar la dirección https://cdnjs.com/libraries/${LibraryName}
+            para que descargues
+            donde LibraryName = ['Zepto', 'jQuery', 'MooTools', ...params];
+            // @ref http://blog.jquery.com/2015/07/13/jquery-3-0-and-jquery-compat-3-0-alpha-versions-released/
+            NOTA: para jQuery v3, es mejor usar la versión compat: https://code.jquery.com/jquery-compat-3.0.0-alpha1.js ya que ayuda a ser compatible con IE < 9, caso contrario NO.
+        -->
+    <!-- /zepto/?-zepto-ie-event-ajax-detect-fx-touch  -->
+    <!--// <script src="http://zeptojs.com/zepto-docs.min.js"></script> -->
+    <script>
+    window.$ || document.write('\u003Cscript src="script/vendor/zepto.min.js">\u003C/script>')
+    </script>
+    <script>
+    ;
+    (function(undefined) {
+        var //Library Function Name: lib
+            lib = null,
+            doc = document;
+        if (typeof Zepto === "undefined" && typeof $ === "function") {
+            lib = $;
+        } else if (typeof Zepto === "function") {
+            lib = Zepto;
+            /*! En main.js se listan plugins y los propios !*/
+            doc.write('\u003Cscript src="script/main.js">\u003C/script>');
+        } else {
+            try {
+                dialogo[4] = 'no-lib';
+                /*! Agremamos .no-lib al elemento html para apoyo si es que no pudo cargar alguna biblioteca !*/
+                doc.documentElement || (doc.documentElement = doc.body.parentNode || doc.body);
+                var h = doc.documentElement;
+                (function(k) {
+                    k += ' no-lib'
+                })(h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className)
+                throw new TypeError('No se pudo cargar ninguna biblioteca');
+            } catch (e) {
+                //console.log('Upss.. ' + e.message);
+            }
+        }
 
-			}
-			dialogo[3] = 'es5';
-		</script>
+        /*! Opcional | TODO Plain JS !*/
+        (function(what, can, i, use) {
+            'use strict';
 
-		<!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
-		<noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
+            use = use || !this;
 
-		<!-- // Cuando no se haya podido iniciar ninguna biblioteca -->
-		<link rel="stylesheet" href="css/no-lib.css">
-	</head>
-	
-	<!-- // El Cuerpo del Documento HTML5 -->
-	<body>
-		<header role="banner">
-			<h1>¡SisePuede!</h1>
-			<h2>no-Legacys</h2>
-		</header>
-		<main role="main">
-			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Empieza ahora a usar <mark>Zepto</mark> :) </p></blockquote>
-		</main>
-		<footer role="contentinfo">
-			<p>¿Pensabas que no se podía? <em>...úsalo.</em></p>
-		</footer>
+            what(can, i, use);
 
-		<div id="preload">
-			<div id="preload-content">
-				<p>Bienvenido...</p>
-				<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor, <a href="http://browsehappy.com/">actualice tu navegador</a> para mejorar la experiencia.</p>
-			</div>
-		</div>
+            i.write('\u003Cscript src="script/' + (use ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+
+        })(typeof what === 'function' ? what : function() {}, (function() {
+            return this || (1, eval)('this');
+        }()), document, lib);
 
 
-<!-- =============== TODO javascript =============== -->
-		<!-- // Aquí se puede iniciar usando cualquier biblioteca. 
-			Podrias usar la dirección https://cdnjs.com/libraries/${LibraryName}
-			para que descargues
-			donde LibraryName = ['Zepto', 'jQuery', 'MooTools', ...params];
-			// @ref http://blog.jquery.com/2015/07/13/jquery-3-0-and-jquery-compat-3-0-alpha-versions-released/
-			NOTA: para jQuery v3, es mejor usar la versión compat: https://code.jquery.com/jquery-compat-3.0.0-alpha1.js ya que ayuda a ser compatible con IE < 9, caso contrario NO.
-		-->
+        function what(w, d, c) {
+            h = d.documentElement || d.body.parentNode || d.body,
+                k = h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className;
+            if (!c) {
+                k += ' no-es5';
+                d.getElementById('browsehappy').style.display = 'block';
+            } else {
+                k = k.replace(/(\s|^)no-es5(\s|$)/, ' ');
+            }
+            return;
+        }
 
-		<!-- /zepto/?-zepto-ie-event-ajax-detect-fx-touch  -->
-		<!--// <script src="http://zeptojs.com/zepto-docs.min.js"></script> -->
-        <script>window.$ || document.write( '\u003Cscript src="script/vendor/zepto.min.js">\u003C/script>' )</script>
 
-		<script>
-			var libFuncName = null;
-			if (typeof Zepto === "undefined" && typeof $ === "function") {
-					libFuncName = $;
-				} else if ( typeof Zepto === "function" ) {
-					libFuncName = Zepto;
-					/*! En main.js se listan plugins y los propios !*/
-					document.write( '\u003Cscript src="script/main.js">\u003C/script>' );
-				} else {
-					try {
-						dialogo[4] = 'no-lib';
-						/*! Agremamos .no-lib al elemento html para apoyo si es que no pudo cargar alguna biblioteca !*/
-    					document.documentElement || ( document.documentElement = document.body.parentNode || document.body );
-    					var h = document.documentElement;
-    					(function(k){k+=' no-lib'})(h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className)	
-					  throw new TypeError( 'No se pudo cargar ninguna biblioteca' );
-					} catch ( e ) {
-						//console.log('Upss.. ' + e.message);
-					}
-				}
-				
-				/*! Opcional | TODO Plain JS !*/
-				(function(g,d){
-			        var caniuse=libFuncName,
-			        	what   = function(all){
-			                		var h = d.documentElement||d.body.parentNode||d.body,
-			                			k = h.nodeName.toLowerCase()==='svg'?h.className.baseVal:h.className;
-			                		return all ? (k=k.replace(/(\s|^)no-es5(\s|$)/, ' '),'vanilla')
-			                				    : (k+=' no-es5',d.getElementById('browsehappy').style.display='block','non-legacy');
-			                	};
+        //Global
+        (window || this).lib = lib;
 
-			        d.write('\u003Cscript src="script/'+what(caniuse)+'.js">\u003C/script>')
+    }).call(('object' == typeof window && window.window === window && window) || (typeof global == 'object' && global.global === global && global) || (typeof self == 'object' && self.self === self && self) || {});
+    </script>
+    <!-- =============== FIN javascript =============== -->
+</body>
 
-			    })("undefined"!==typeof window?window:"undefined"!==typeof global?global:"undefined"!==typeof self?self:this,document);
-		</script>
-<!-- =============== FIN javascript =============== -->
-
-	</body>
 </html>

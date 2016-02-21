@@ -11,4 +11,4 @@
 
 	 });
   
-})( libFuncName );
+})( lib );
