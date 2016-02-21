@@ -80,7 +80,7 @@ Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar 
 		Desktop: IE:9+, EDG:12+, FF:4+, CHR:13+, SF:6+, OP:12.1+  
 	    Mobiles: SF:5.1+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
 	    
-	var isHTML5=!!(g.HTMLCanvasElement&&g.localStorage&&d.querySelectorAll)
+	var isHTML5=!!(window.HTMLCanvasElement&&window.localStorage&&document.querySelectorAll)
 	RESULTADOS:
 		Desktop: IE:9+:, EDG:12+, FF:3.6+, CHR:4+, SF:4+, OP:11.5+  
 	    Mobiles: SF:3.2+, -OP_mini, DROIT:3+, BB:7+, OP_MOB:12+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
@@ -89,6 +89,8 @@ Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar 
 	RESULTADOS:
 		Desktop: IE:10+:, EDG:12+, FF:21+, CHR:23+, SF:6+, OP:15+
 	    Mobiles: SF:6.1+, -OP_mini:, DROIT:4.4+, BB:10+, OP_MOB:33+, CHRxDROIT:47+, FFxDROIT:44+, IE:10+, UCxDROIT:9.9+
+	   
+Ver resultados de confianza en [jsPerf](http://jsperf.com/what-can-i-do).
 
 Básicamente mi propuesta es una versión modificada de: 
 
