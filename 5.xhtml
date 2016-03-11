@@ -67,14 +67,14 @@
 
     })(typeof what === 'function' ? what : function() {}, (function() {
         return this || (1, eval)('this');
-    }()), document, (undefined = 'whatcaniuse') && typeof undefined == 'undefined' );
+    }()), document);
 
-    function what(w, d, c) {
-        if (!c) {
-            h = d.documentElement || d.body.parentNode || d.body,
-                k = h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className;
-            k += ' no-es5';
-            d.getElementById('browsehappy').style.display = 'block';
+    function what(view, doc, boo) {
+        var docEle = doc.documentElement || doc.body.parentNode || doc.body;
+
+        if (!boo) {
+            "svg" === docEle.nodeName.toLowerCase() ? docEle.className.baseVal += " legacy" : docEle.className += " legacy";
+            doc.getElementById('browsehappy').style.display = 'block';
         } else {
             dialogo.push('xhtml5');
         }
@@ -108,4 +108,3 @@
 </body>
 
 </html>
-

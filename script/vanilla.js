@@ -1,23 +1,3 @@
-/*! --- Necesario para navegadores que no son IE usando shim --- !*/
-
-if( dialogo.indexOf('no-IE') != -1 ) { 
-	document.querySelectorAll = function (selectors) {
-		return document.documentElement.querySelectorAll(selectors);
-	}
-	document.querySelector = function (selectors) {
-	    var elements = document.querySelectorAll(selectors);
-	    return (elements.length) ? elements[0] : null;
-	  };
-
-	document.getElementsByTagName = function (selectors){
-		var elements = document.documentElement.getElementsByTagName(selectors);
-	    return (elements.length) ? elements[0] : null;
-	}
-}
-
-/*! --- FIN de lo necesario para CSS_selector_engine.js --- !*/
-
-
 /*! INICIO de Vanilla JS !*/
 
 /*! like Zepto: $.fadeIn(), $.fadeOut(), $.prepend(), $.prependTo() !*/
@@ -43,9 +23,9 @@ var if_show_fade = function(){
 		}
 	}
 
-if( dialogo.indexOf('html5') != -1 || dialogo.indexOf('xhtml5') != -1 ) { 
+if( dialogo.indexOf('html5') !== -1 || dialogo.indexOf('xhtml5') !== -1 ) { 
 	if_show_fade();
-} else if( dialogo.indexOf('es5') != -1 ){
+} else if( dialogo.indexOf('es5') !== -1 ){
 		window.setTimeout(function () {
 			if_show_fade();
 		}, 800);

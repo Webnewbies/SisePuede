@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es-PE">
+
 <head>
     <meta charset="utf-8">
     <title>SisePuede: Puro HTML5 y ECMAScript 5+ para navegadores modernos!</title>
@@ -18,9 +19,6 @@
     </script>
     <!-- // Usamos los servicios de Polyfill para ES5 -->
     <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
-    
-    <!-- @ref https://github.com/paulmillr/es6-shim -->
-    <script src="script/vendor/es6-shim.min.js"></script>
 
     <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
     <noscript>
@@ -66,22 +64,20 @@
     }()), document, (undefined = 'whatcaniuse') && typeof undefined == 'undefined');
 
 
-    function what(w, d, c) {
-        if (!c) {
-            h = d.documentElement || d.body.parentNode || d.body,
-                k = h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className;
-            k += ' no-es5';
-            d.getElementById('browsehappy').style.display = 'block'
+    function what(view, doc, boo) {
+        var docEle = doc.documentElement || doc.body.parentNode || doc.body;
+
+        if (!boo) {
+            "svg" === docEle.nodeName.toLowerCase() ? docEle.className.baseVal += " legacy" : docEle.className += " legacy";
+            doc.getElementById('browsehappy').style.display = 'block';
         } else {
             dialogo.push('html5');
         }
         return;
     }
-
     //-->
     </script>
     <!-- =============== FIN javascript =============== -->
 </body>
 
 </html>
-

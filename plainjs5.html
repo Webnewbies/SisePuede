@@ -14,49 +14,57 @@
     <script src="script/vendor/modernizr-custom.min.js"></script>
 
     <script>
-    var // Nos servirá para iniciar diálogo por cada instrucción de ser necesario
+    var // Nos servirá para iniciar diálogo en cada instrucción de ser necesario
         dialogo = [];
 
-    if ( !Modernizr.es5 ) {
-
+    if (!Modernizr.es5) {
         dialogo[0] = 'shim';
 
-        /*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
-        'article aside dialog figcaption figure footer header main nav section mark template'.replace(/\w+/g, function(n) {
-            document.createElement(n)
-        });
+        /*! https://gist.github.com/jalbertbowden/5174156 !*/
+        var ieVersion = (!!window.ActiveXObject && +(/msie\s(\d+)/i.exec(navigator.userAgent)[1])) || NaN;
 
-        /*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
-        if ( /*@cc_on!@*/ true) {
-
-            dialogo[1] = 'no-IE';
-
-            /*! @ref https://github.com/termi/CSS_selector_engine !*/
-            document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>');
-
-            // {Aquí se puede agregar más polyfills para ECMAScript <= 5: http://html5polyfills.com}
-
-        } else {
-            /*! https://gist.github.com/jalbertbowden/5174156 !*/
-            var ieVersion = (!!window.ActiveXObject && +(/msie\s(\d+)/i.exec(navigator.userAgent)[1])) || NaN;
-
-            if (ieVersion) dialogo[2] = 'IE';
-
-            /*! @ref https://github.com/termi/ES5-DOM-SHIM !*/
-            if (ieVersion == 8) document.write('\u003Cscript src="script/vendor/legacy/a.ie8.js">\u003C/script>');
-            if (ieVersion < 8) document.write('\u003Cscript src="script/vendor/legacy/a.ielt8.js">\u003C/script>');
-
-            // {Aquí se puede agregar más polyfills sólo para IE<10: http://html5polyfills.com}
-
-        }
+        dialogo[0] = 'es3';
 
         /*! Añadimos ECMAScript 5 Shim !*/
-        document.write('\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>');
+        document.write('\u003Cscript src="script/vendor/legacy/es5-shim.min.js">\u003C/script>');
+        document.write('\u003Cscript src="script/vendor/legacy/es5-sham.min.js">\u003C/script>');
+
+        /*! AQUÍ puedes agregar ECMAScript 6 Shim !*/
+
+        /*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
+        if ( /*@cc_on!@*/ true) dialogo[1] = 'no-IE';
+        if (ieVersion) dialogo[2] = 'IE';
+
+        if (ieVersion < 10) {
+            /*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
+            'section article aside header footer nav figure figcaption time mark main menu'.replace(/\w+/g, function(n) {
+                document.createElement(n)
+            });
+        }
+
+        /*!! @ref https://gist.github.com/visualisierte/5891086 */
+        if (ieVersion < 9) document.write('\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>');
+
+        if (ieVersion < 8) {
+             dialogo[3] = 'CSS_selector_engine';
+            /*! @ref https://github.com/termi/CSS_selector_engine !*/
+            document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.ielt8.js">\u003C/script>');
+        }
+
+        if (ieVersion > 7 || /*@cc_on!@*/ true) {
+            dialogo[3] = 'CSS_selector_engine';
+            /*! @ref https://github.com/termi/CSS_selector_engine !*/
+            document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>');
+        }
+
+        // {Aquí se puede agregar más polyfills: http://html5polyfills.com}
+        document.write('\u003Cscript src="script/vendor/legacy/classList.js">\u003C/script>');
+
+        dialogo[4] = 'es5';
+
+    } else {
+        dialogo[4] = !!( Array.prototype && Array.prototype.pop ) ? 'es6' : 'es1';
     }
-
-    dialogo[3] = 'es5';
-
-    /*! AQUÍ añade ECMAScript 6 Shim !*/
     </script>
     <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
     <noscript>
@@ -87,31 +95,60 @@
     </div>
     <!-- =============== TODO javascript =============== -->
     <script>
-    /*! Opcional | TODO Plain JS !*/
-    (function(what, can, i, use) {
-        'use strict';
+    <!--
+        (function(what, can, i, use) {
+            'use strict';
 
-        use = use || !this;
+            use = use || !this;
 
-        what(can, i, use);
+            what(can, i, use);
 
-        i.write('\u003Cscript src="script/' + (use ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+            i.write('\u003Cscript src="script/' + (use ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
 
-    })(typeof what === 'function' ? what : function() {}, (function() {
-        return this || (1, eval)('this');
-    }()), document, dialogo.indexOf('es5') != -1);
+        })(typeof what === 'function' ? what : function() {}, (function() {
+            return this || (1, eval)('this');
+        }()), document, !!document.createElement('main').classList );
 
-    function what(w, d, c) {
-        h = d.documentElement || d.body.parentNode || d.body,
-            k = h.nodeName.toLowerCase() === 'svg' ? h.className.baseVal : h.className;
-        if (!c) {
-            k += ' no-es5';
-            d.getElementById('browsehappy').style.display = 'block'
-        } else {
-            k = k.replace(/(\s|^)no-es5(\s|$)/, ' ');
+        /*! Opcional | TODO Plain JS !*/
+        function what(view, doc, boo) {
+            var docEle = doc.documentElement || doc.body.parentNode || doc.body.parentElement;
+
+            var css = (function(h) {
+                var k = "svg" === h.nodeName.toLowerCase() ? h.className.baseVal : h.className;
+                return {
+                    f: function(a) {
+                        return new RegExp("(^| )" + a + "( |$)");
+                    },
+                    contain: function(a, b) {
+                        return k && k.match(css.f(b));
+                    },
+                    remove: function(a, b) {
+                        a.className = k.replace(css.f(b), " ").replace(/  /g, " ");
+                        return true;
+                    },
+                    add: function(a, b) {
+                        if (css.contain(a, b)) {
+                            return true;
+                        }
+                        "svg" === h.nodeName.toLowerCase() ? a.className.baseVal += " " + b : a.className += " " + b;
+                    }
+
+                };
+
+            })(docEle);
+
+
+            if (!boo) {
+                css.add(docEle, 'legacy');
+                doc.getElementById('browsehappy').style.display = 'block';
+            } else {
+                if (css.contain(docEle, 'no-es5')) {
+                    css.remove(docEle, 'no-es5');
+                }
+            }
+            return;
         }
-        return;
-    }
+    -->
     </script>
     <!-- =============== FIN javascript =============== -->
 </body>

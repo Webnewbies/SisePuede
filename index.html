@@ -1,98 +1,105 @@
 <!doctype html>
 <html class="no-js" lang="es-PE">
-	<head>
-		<meta charset="utf-8">
-		<title>SisePuede: Vanilla JS, para navagadores antiguos y modernos</title>
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
-    	<meta name="description" content="SisePuede: Solución para navegadores antiguos y modernos">
-    	<meta content="Pedro Macedo Minchán" name="author">
-    	<meta name="contact" content="pedro.macedo.minchan@gmail.com">
-    	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		
-		<!-- // TODO nuestro estilo CSS2+ -->
-		<link rel="stylesheet" href="css/main.css">
 
-		<!-- http://modernizr.com/download/?-es5-setclasses -->
-    	<script src="script/vendor/modernizr-custom.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <title>SisePuede: Vanilla JS, para navagadores antiguos y modernos</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="SisePuede: Solución para navegadores antiguos y modernos">
+    <meta content="Pedro Macedo Minchán" name="author">
+    <meta name="contact" content="pedro.macedo.minchan@gmail.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <!-- // TODO nuestro estilo CSS2+ -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- http://modernizr.com/download/?-es5-setclasses -->
+    <script src="script/vendor/modernizr-custom.min.js"></script>
+    <script>
+    var // Nos servirá para iniciar diálogo en cada instrucción de ser necesario
+        dialogo = [];
 
-		<script>
-			var // Nos servirá para iniciar diálogo por cada instrucción de ser necesario
-				dialogo = [];
+    if (!Modernizr.es5) {
 
-			if( !Modernizr.es5) {
+        /*! https://gist.github.com/jalbertbowden/5174156 !*/
+        var ieVersion = (!!window.ActiveXObject && +(/msie\s(\d+)/i.exec(navigator.userAgent)[1])) || NaN;
 
-				dialogo[0] = 'shim';
+        dialogo[0] = 'es3';
 
-				/*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
-				'article aside dialog figcaption figure footer header main nav section mark template'.replace(/\w+/g,function(n){document.createElement(n)});
+        /*! Añadimos ECMAScript 5 Shim !*/
+        document.write('\u003Cscript src="script/vendor/legacy/es5-shim.min.js">\u003C/script>');
+        document.write('\u003Cscript src="script/vendor/legacy/es5-sham.min.js">\u003C/script>');
 
-				/*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
-				if ( /*@cc_on!@*/true ) {
+        /*! AQUÍ puedes agregar ECMAScript 6 Shim !*/
 
-					dialogo[1] = 'no-IE';
-	
-					/*! @ref https://github.com/termi/CSS_selector_engine !*/
-					document.write( '\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>' );
+        /*! @ref http://browserhacks.com/#hack-51eca7694aed2dcc3266bc9c8de72872 !*/
+        if ( /*@cc_on!@*/ true) dialogo[1] = 'no-IE';
+        if (ieVersion) dialogo[2] = 'IE';
 
-					// {Aquí se puede agregar más polyfills para ECMAScript <= 5: http://html5polyfills.com}
+        if (ieVersion < 10) {
+            /*! @ref http://www.hagenburger.net/BLOG/Simple-HTML5-Fix-for-IE.html !*/
+            'section article aside header footer nav figure figcaption time mark main menu'.replace(/\w+/g, function(n) {
+                document.createElement(n)
+            });
+        }
 
-				} else {
-					/*! https://gist.github.com/jalbertbowden/5174156 !*/
-					var ieVersion = ( !!window.ActiveXObject && +( /msie\s(\d+)/i.exec( navigator.userAgent )[1] ) ) || NaN;
+        /*!! @ref https://gist.github.com/visualisierte/5891086 */
+        if (ieVersion < 9) document.write('\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>');
 
-					if( ieVersion ) dialogo[2] = 'IE';
+        if (ieVersion < 8) {
+        	 dialogo[3] = 'CSS_selector_engine';
+            /*! @ref https://github.com/termi/CSS_selector_engine !*/
+        	document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.ielt8.js">\u003C/script>');
+        }
 
-					/*! @ref https://github.com/termi/ES5-DOM-SHIM !*/
-					if ( ieVersion == 8 ) document.write( '\u003Cscript src="script/vendor/legacy/a.ie8.js">\u003C/script>' );
-					if ( ieVersion < 8 ) document.write( '\u003Cscript src="script/vendor/legacy/a.ielt8.js">\u003C/script>' );
+        if (ieVersion > 7 || /*@cc_on!@*/ true) {
+            dialogo[3] = 'CSS_selector_engine';
+            /*! @ref https://github.com/termi/CSS_selector_engine !*/
+            document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>');
+        }
 
-					// {Aquí se puede agregar más polyfills sólo para IE<10: http://html5polyfills.com}
+        // {Aquí se puede agregar más polyfills: http://html5polyfills.com}
+        document.write('\u003Cscript src="script/vendor/legacy/classList.js">\u003C/script>');
 
-				}
-				
-				/*! Añadimos ECMAScript 5 Shim !*/
-				document.write( '\u003Cscript src="script/vendor/legacy/a.js">\u003C/script>' );
-			}
+        dialogo[4] = 'es5';
 
-			dialogo[3] = 'es5';
+    } else {
+        dialogo[4] = !!( Array.prototype && Array.prototype.pop ) ? 'es6' : 'es1';
+    }
+    </script>
+    <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
+    <noscript>
+        <link rel="stylesheet" href="css/no-js.css">
+    </noscript>
+</head>
+<!-- // El Cuerpo del Documento HTML5 -->
 
-			/*! AQUÍ añade ECMAScript 6 Shim !*/
+<body>
+    <header role="banner">
+        <h1>¡Si se puede!</h1>
+        <h2>no-Legacys</h2>
+    </header>
+    <main role="main">
+        <blockquote cite="http://www.ecma-international.org/ecma-262/5.1/">
+            <p>¡Ahora podrás escribir con
+                <mark>ECMAScript 5!+ usando Vanilla JS</mark> :) </p>
+        </blockquote>
+    </main>
+    <footer role="contentinfo">
+        <p>¿Piensas que no se puede? <em>...haz tu mismo las pruebas.</em></p>
+        <p>Con Polyfills: <a href="li5.html">Zepto</a> | <a href="plainjs5.html">PlainJS</a>
+            <br /> Sin Polyfills: <a href="5.html">HTML5</a> | <a href="5.xhtml">XHTML5</a></p>
+    </footer>
+    <div id="preload">
+        <div id="preload-content">
+            <p>Bienvenido...</p>
+        </div>
+        <p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor, <a href="http://browsehappy.com/">actualice tu navegador</a> para mejorar la experiencia.</p>
+    </div>
+    <!-- =============== TODO javascript =============== -->
+    <script>
+    /*! TODO Plain JS !*/
+    document.write('\u003Cscript type="text/javascript" src="script/' + (  dialogo.indexOf('es1') === -1 ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+    </script>
+    <!-- =============== FIN javascript =============== -->
+</body>
 
-		</script>
-
-		<!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
-		<noscript><link rel="stylesheet" href="css/no-js.css"></noscript>
-	</head>
-	
-	<!-- // El Cuerpo del Documento HTML5 -->
-	<body>
-		<header role="banner">
-			<h1>¡Si se puede!</h1>
-			<h2>no-Legacys</h2>
-		</header>
-		<main role="main">
-			<blockquote cite="http://www.ecma-international.org/ecma-262/5.1/"><p>¡Ahora podrás escribir con <mark>ECMAScript 5!+ usando Vanilla JS</mark> :) </p></blockquote>
-		</main>
-		<footer role="contentinfo">
-			<p>¿Piensas que no se puede? <em>...haz tu mismo las pruebas.</em></p>
-			<p>Con Polyfills: <a href="li5.html">Zepto</a> | <a href="plainjs5.html">PlainJS</a> <br /> 
-			Sin Polyfills: <a href="5.html">HTML5</a> | <a href="5.xhtml">XHTML5</a></p>
-		</footer>
-
-		<div id="preload">
-			<div id="preload-content">
-				<p>Bienvenido...</p>
-			</div>
-			<p id="browsehappy">Estás usando un navegador <strong>desactualizado</strong>. Por favor, <a href="http://browsehappy.com/">actualice tu navegador</a> para mejorar la experiencia.</p>
-		</div>
-
-
-<!-- =============== TODO javascript =============== -->
-		<script>
-			/*! TODO Plain JS !*/
-		  	document.write( '\u003Cscript type="text/javascript" src="script/' + ( dialogo.indexOf('es5') != -1 ? 'vanilla' : 'non-legacy' ) + '.js">\u003C/script>' );
-		</script>
-<!-- =============== FIN javascript =============== -->
-
-	</body>
 </html>
