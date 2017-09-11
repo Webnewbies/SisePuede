@@ -14,6 +14,12 @@
     <!-- http://modernizr.com/download/?-es5-setclasses -->
     <script src="script/vendor/modernizr-custom.min.js"></script>
     <script>
+        var loadScript = function(src) {
+            var js = document.createElement('script'); js.type = 'text/javascript'; js.src = src;
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);
+        };
+    </script>
+    <script>
     var // Nos servirá para iniciar diálogo en cada instrucción de ser necesario
         dialogo = [];
 
@@ -37,30 +43,30 @@
 
         if (ieVersion < 9) {
             /*!! @ref https://gist.github.com/visualisierte/5891086 */
-            document.write('\u003Cscript src="script/vendor/legacy/getComputedStyle.js">\u003C/script>');
+            loadScript('script/vendor/legacy/getComputedStyle.js');
 
             /*! https://github.com/nbouvrette/eventListenerPolyfill !*/
-            document.write('\u003Cscript src="script/vendor/legacy/eventListenerIEPolyfill.min.js">\u003C/script>');
+            loadScript('script/vendor/legacy/eventListenerIEPolyfill.min.js');
         }
 
         if (ieVersion < 8) {
         	 dialogo[3] = 'CSS_selector_engine';
             /*! @ref https://github.com/termi/CSS_selector_engine !*/
-        	document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.ielt8.js">\u003C/script>');
+        	loadScript('script/vendor/legacy/CSS_selector_engine.ielt8.js');
         }
 
         if (ieVersion > 7 || /*@cc_on!@*/ true) {
             dialogo[3] = 'CSS_selector_engine';
             /*! @ref https://github.com/termi/CSS_selector_engine !*/
-            document.write('\u003Cscript src="script/vendor/legacy/CSS_selector_engine.js">\u003C/script>');
+            loadScript('script/vendor/legacy/CSS_selector_engine.js');
         }
 
         // {Aquí se puede agregar más polyfills: http://html5polyfills.com}
-        document.write('\u003Cscript src="script/vendor/legacy/classList.js">\u003C/script>');
+        loadScript('script/vendor/legacy/classList.js');
 
         /*! Añadimos ECMAScript 5 Shim !*/
-        document.write('\u003Cscript src="script/vendor/legacy/es5-shim.min.js">\u003C/script>');
-        document.write('\u003Cscript src="script/vendor/legacy/es5-sham.min.js">\u003C/script>');
+        loadScript('script/vendor/legacy/es5-shim.min.js');
+        loadScript('script/vendor/legacy/es5-sham.min.js');
 
         dialogo[4] = 'es5';
 
@@ -68,6 +74,9 @@
         dialogo[4] = !!( Array.prototype && Array.prototype.pop ) ? 'es6' : 'es1';
     }
     </script>
+    <script>/*! Necesario para CSS_selector_engine !*/
+-1!==dialogo.indexOf("CSS_selector_engine")&&(document.matchesSelector=function(a){return document.documentElement.matchesSelector(a)}, document.matches=function(a){return document.documentElement.matches(a)}, document.querySelectorAll=function(a){return document.documentElement.querySelectorAll(a)}, document.querySelector=function(a){return document.documentElement.querySelector(a)[0]}, document.getElementsByClassName=function(a){return document.documentElement.getElementsByClassName(a)});
+</script>
     <!-- // Cuando el navegador tiene desactivado el motor de Javascript -->
     <noscript>
         <link rel="stylesheet" href="css/no-js.css">
@@ -100,7 +109,7 @@
     <!-- =============== TODO javascript =============== -->
     <script>
     /*! TODO Plain JS !*/
-    document.write('\u003Cscript type="text/javascript" src="script/' + (  dialogo.indexOf('es1') === -1 ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+    loadScript('script/' + (  dialogo.indexOf('es1') === -1 ? 'vanilla' : 'non-legacy') + '.js');
     </script>
     <!-- =============== FIN javascript =============== -->
 </body>

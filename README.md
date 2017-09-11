@@ -1,4 +1,4 @@
-# SisePuede v0.9.1
+# SisePuede v0.9.2
 Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar las bondades de ECMASCript5/6 y (X)HTML5+ incluyendo en navegadores muy antiguos *(siempre y cuando el navegador permita la creación de elementos html5)*, haciendo uso de polyfills si así lo requiera el navegador.
 
 :::Proyecto: 
@@ -22,6 +22,13 @@ Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar 
 ```js
 <script>
 	/*! ⒲⒣⒜⒯ ⒞⒜⒩ ⒤ ⒰⒮⒠ !*/
+	/**
+     * Función para importar archivo js.
+    */
+    var loadScript = function(src) {
+      var js = document.createElement('script'); js.type = 'text/javascript'; js.src = src;
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);
+    };
     /**
      * Inyecta un archivo js según condición pero antes ejecuta callback.
      * @param {requestCallback} what - La devolución de llamada que se encarga de la respuesta.
@@ -37,7 +44,7 @@ Holas! Esto es **SisePuede!**, un repositorio donde explico y motivo a utilizar 
 
         what(can, i, use);
 
-        i.write('\u003Cscript src="script/' + (use ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+        loadScript('script/' + (use ? 'vanilla' : 'non-legacy') + '.js');
 
      })(typeof what === 'function' ? what : function() {}, (function() { return this || (1, eval)('this'); }()), document);
     

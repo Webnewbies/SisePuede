@@ -15,6 +15,14 @@
 (function(undefined) {
 
     /**
+     * Ayudante para importar un archivo js.
+    */
+    var loadScript = function(src) {
+      var js = document.createElement('script'); js.type = 'text/javascript'; js.src = src;
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);
+    };
+
+    /**
      * Inyecta un archivo js según condición pero antes ejecuta callback.
      * @param {requestCallback} what - La devolución de llamada que se encarga de la respuesta.
      * @param {Object} can - this.
@@ -29,7 +37,7 @@
 
         what(can, i, use);
 
-        i.write('\u003Cscript src="script/' + (use ? 'vanilla' : 'non-legacy') + '.js">\u003C/script>');
+        loadScript('script/' + (use ? 'vanilla' : 'non-legacy') + '.js');
 
     })(typeof what === 'function' ? what : function() {}, (function() { return this || (1, eval)('this'); }()), document);
 
